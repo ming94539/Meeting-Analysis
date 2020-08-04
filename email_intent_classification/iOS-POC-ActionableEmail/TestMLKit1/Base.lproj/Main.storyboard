@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TestMLKit1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="YES" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your own text here, or click one of the fill text buttons and then click Classify" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MGb-VI-ihM">
+                                <rect key="frame" x="16" y="20" width="343" height="146"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="146" id="XSM-Ru-L9T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="textDropDelegate" destination="BYZ-38-t0r" id="xUh-LD-gS8"/>
+                                </connections>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67i-tq-V6P">
+                                <rect key="frame" x="139" y="190" width="96" height="30"/>
+                                <state key="normal" title="Fill Test 1 Text"/>
+                                <connections>
+                                    <action selector="fillTextDemo1Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5e-1o-Xzp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iv1-yS-FPK">
+                                <rect key="frame" x="138" y="228" width="98" height="30"/>
+                                <state key="normal" title="Fill Test 2 Text"/>
+                                <connections>
+                                    <action selector="fillTextDemo2Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oFT-It-2Mf"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="YES" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="H8s-re-YUN">
+                                <rect key="frame" x="111" y="266" width="153" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXE-d5-jQN">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="30"/>
+                                        <state key="normal" title="Classify"/>
+                                        <connections>
+                                            <action selector="classifyButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NsI-io-w1T"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkn-jD-gVA">
+                                        <rect key="frame" x="84" y="0.0" width="69" height="30"/>
+                                        <state key="normal" title="Clear Text"/>
+                                        <connections>
+                                            <action selector="clearTextButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1OV-CE-dPJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyF-gs-uOP">
+                                <rect key="frame" x="166" y="295" width="25" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Confidence:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kff-bm-rfm">
+                                <rect key="frame" x="20" y="295" width="129" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LyF-gs-uOP" firstAttribute="top" secondItem="kff-bm-rfm" secondAttribute="top" id="TsB-Vf-9Cz"/>
+                            <constraint firstItem="Iv1-yS-FPK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VXD-Lx-Nbv"/>
+                            <constraint firstItem="67i-tq-V6P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="avm-Aw-O3H"/>
+                            <constraint firstItem="MGb-VI-ihM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="crz-do-SwZ"/>
+                            <constraint firstItem="H8s-re-YUN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f2n-jD-yWI"/>
+                            <constraint firstItem="MGb-VI-ihM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="gGp-ce-vgQ"/>
+                            <constraint firstItem="H8s-re-YUN" firstAttribute="top" secondItem="Iv1-yS-FPK" secondAttribute="bottom" constant="8" id="hqu-tc-jdR"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LyF-gs-uOP" secondAttribute="trailing" constant="20" symbolic="YES" id="mBr-kK-pMn"/>
+                            <constraint firstItem="67i-tq-V6P" firstAttribute="top" secondItem="MGb-VI-ihM" secondAttribute="bottom" constant="24" id="oKP-L1-hrw"/>
+                            <constraint firstItem="kff-bm-rfm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="p5z-Gr-4ux"/>
+                            <constraint firstItem="Iv1-yS-FPK" firstAttribute="top" secondItem="67i-tq-V6P" secondAttribute="bottom" constant="8" id="pqF-el-3sy"/>
+                            <constraint firstItem="kff-bm-rfm" firstAttribute="top" secondItem="H8s-re-YUN" secondAttribute="bottom" constant="-1" id="rAR-wo-tJ2"/>
+                            <constraint firstItem="LyF-gs-uOP" firstAttribute="leading" secondItem="kff-bm-rfm" secondAttribute="trailing" constant="17" id="wIp-dY-Sc0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MGb-VI-ihM" secondAttribute="trailing" constant="16" id="wbA-ae-nJG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="classificationConfidence" destination="LyF-gs-uOP" id="raO-ZI-W7d"/>
+                        <outlet property="classificationTextView" destination="MGb-VI-ihM" id="ZWD-yD-9YT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98.400000000000006" y="104.7976011994003"/>
+        </scene>
+    </scenes>
+</document>
