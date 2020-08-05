@@ -1,32 +1,42 @@
 
 from keras.models import load_model
 from keras.preprocessing import sequence
-from nltk import pos_tag, word_tokenize, sent_tokenize
+from nltk import pos_tag, word_tokenize, sent_tokenize, PorterStemmer
+from nltk.corpus import stopwords
 import sys
 import csv
 import pandas as pd
-# test = pd.read_csv('./resources/testing-cleaned.txt', sep='^', header=None)
+stop_w = stopwords.words('english')
+# Read transcript file into a string
 dialogue_str = ""
 file_name = sys.argv[1]
 f = open(file_name,"r")
 lines = f.readlines()
 for line in lines:
    dialogue_str+=line
-
+dialogue_str = dialogue_str.strip()
+dialogue_str = dialogue_str.replace("\n"," ")
+print(dialogue_str)
 sentences = sent_tokenize(dialogue_str)
-#Get Vocab Dictionary
+#Get Vocab Dictionary for tokenization in next step
 with open('vocab.csv',mode = 'r') as infile:
     reader = csv.reader(infile)
     with open('vocab_new.csv',mode='w') as outfile:
         writer = csv.writer(outfile)
         word2idx = {rows[0]:rows[1] for rows in reader}
-print(word2idx)
+#print(word2idx)
 #Tokenize all the sentences
 total_tokenized = []
 max_length = 0
+ps = PorterStemmer()
 for sentence in sentences:
     sent_tokens = []
     for word in word_tokenize(sentence):
+        #word = word.lower()
+        #stem = ps.stem(word)
+        #if word in stop_w or stem in stop_w:
+        #    print(word)
+        #    continue
         if word not in word2idx:
             sent_tokens.append(1)
         else:
@@ -37,12 +47,10 @@ for sentence in sentences:
 
 print('max tokens length sentence:',max_length)
 inference_input  = sequence.pad_sequences(total_tokenized, maxlen=100)
-print(inference_input)
+
 model = load_model('best_cnn_weights.hdf5')
 model.summary()
 predicted = model.predict_classes(inference_input)
-
-print('predicted:',predicted)
 
 for i in range(len(predicted)):
     if predicted[i][0] == 1:
