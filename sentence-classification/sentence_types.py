@@ -235,7 +235,7 @@ def gen_test_comments(max_samples=999999999):
     
     tagged_comments = {}
     
-    with open('data/train-v2.0.json', 'r') as qa:
+    with open('sentence-classification/data/train-v2.0.json', 'r') as qa:
         parsed = json.load(qa)
 
     statement_count = 0
@@ -277,8 +277,8 @@ def gen_test_comments(max_samples=999999999):
                     question_count += 1
 
     # Pulls all data from the SPAADIA dataset, adds to our dataset
-    for doc in os.listdir('data/SPAADIA'):
-        with open('data/SPAADIA/' + doc, 'r') as handle:
+    for doc in os.listdir('sentence-classification/data/SPAADIA'):
+        with open('sentence-classification/data/SPAADIA/' + doc, 'r') as handle:
             conversations = BeautifulSoup(handle, features="xml")
             for imperative in conversations.findAll("imp"):
                     imperative = imperative.get_text().replace("\n", "")
@@ -302,7 +302,7 @@ def gen_test_comments(max_samples=999999999):
                         question_count += 1
 
     # Pulls all the data from the manually generated imparatives dataset
-    with open('data/imperatives.csv', 'r') as imperative_file:
+    with open('sentence-classification/data/imperatives.csv', 'r') as imperative_file:
         for row in imperative_file:
             imperative = row.replace("\n", "")
             if command_count < max_samples and imperative not in tagged_comments:
@@ -393,10 +393,10 @@ def export_embedding(word_encoding, category_encoding,
        or (not category_encoding) or 2 > len(category_encoding):
         return
     
-    with open(embedding_name+"_word_encoding.json", "w") as embedding:
+    with open("sentence-classification"+embedding_name+"_word_encoding.json", "w") as embedding:
         embedding.write(json.dumps(word_encoding))
 
-    with open(embedding_name+"_cat_encoding.json", "w") as embedding:
+    with open("sentence-classification"+embedding_name+"_cat_encoding.json", "w") as embedding:
         embedding.write(json.dumps(category_encoding))
     
     

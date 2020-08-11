@@ -16,16 +16,15 @@ for line in lines:
    dialogue_str+=line
 dialogue_str = dialogue_str.strip()
 dialogue_str = dialogue_str.replace("\n"," ")
-print(dialogue_str)
 sentences = sent_tokenize(dialogue_str)
 if len(sentences) == 1:
     from deepsegment import DeepSegment
     segmenter=DeepSegment('en')
     sentences = segmenter.segment_long(sentences[0])
 #Get Vocab Dictionary for tokenization in next step
-with open('vocab.csv',mode = 'r') as infile:
+with open('email_intent_classification/vocab.csv',mode = 'r') as infile:
     reader = csv.reader(infile)
-    with open('vocab_new.csv',mode='w') as outfile:
+    with open('email_intent_classification/vocab_new.csv',mode='w') as outfile:
         writer = csv.writer(outfile)
         word2idx = {rows[0]:rows[1] for rows in reader}
 #print(word2idx)
@@ -49,18 +48,25 @@ for sentence in sentences:
         max_length = len(sent_tokens)
     total_tokenized.append(sent_tokens)
 
-print('max tokens length sentence:',max_length)
 inference_input  = sequence.pad_sequences(total_tokenized, maxlen=100)
 
-model = load_model('best_cnn_weights.hdf5')
+model = load_model('email_intent_classification/best_cnn_weights.hdf5')
 model.summary()
 predicted = model.predict_classes(inference_input)
-
+print('Number of sentences input into the model', len(sentences))
+print('model output number of sentences:', len(predicted))
 for i in range(len(predicted)):
     if predicted[i][0] == 1:
         print('PREV SENT:',sentences[i-1])
-        print('ACTION:',sentences[i])
+        print('ACTION:',i,sentences[i])
         print('---------')
+output = open("email_intent_classification/boxer_predictions.txt","w+")
+for p in predicted:
+    output.write('%s\n' % p[0])
+output.close()
+
+print('max tokens length sentence:',max_length)
+
 # testData = test.as_numpy()
 # xTest = 
 # max_len = 0

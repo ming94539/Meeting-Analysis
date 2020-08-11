@@ -37,6 +37,11 @@ spacy_nlp = spacy.load("en")
 
 #python3 sentence_cnn_save.py models/cnn path_to_transcript
 
+if len(sys.argv) != 3:
+    print("Wrong number of arguments, this warning forces you to do inferencing by loading model")
+    exit()
+
+
 get_transcript = False
 dialogue_str = ""
 #Read in transcript file
@@ -59,6 +64,7 @@ if len(arguments) >= 1:
 print(model_name)
 print("Load Model?", (load_model_flag))
 
+
 # Model configuration
 maxlen = 500
 batch_size = 64
@@ -67,34 +73,35 @@ filters = 100
 kernel_size = 5
 hidden_dims = 350
 epochs = 2
-
-# Add parts-of-speech to data
+    
+    # Add parts-of-speech to data
 pos_tags_flag = True
 
 
-# Export & load embeddings
-x_train, x_test, y_train, y_test = load_encoded_data(data_split=0.8,
-                                                     embedding_name=embedding_name,
-                                                     pos_tags=pos_tags_flag)
-
-word_encoding, category_encoding = import_embedding(embedding_name)
-
-max_words   = len(word_encoding) + 1
-num_classes = np.max(y_train) + 1
-
-print(max_words, 'words')
-print(num_classes, 'classes')
-
-print('Pad sequences (samples x time)')
-x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
-x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
-
-print('Convert class vector to binary class matrix '
-      '(for use with categorical_crossentropy)')
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
-
 if not load_model_flag:
+        
+    # Export & load embeddings
+    x_train, x_test, y_train, y_test = load_encoded_data(data_split=0.8,
+                                                         embedding_name=embedding_name,
+                                                         pos_tags=pos_tags_flag)
+    
+    word_encoding, category_encoding = import_embedding(embedding_name)
+    
+    max_words   = len(word_encoding) + 1
+    num_classes = np.max(y_train) + 1
+    
+    print(max_words, 'words')
+    print(num_classes, 'classes')
+    
+    print('Pad sequences (samples x time)')
+    x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
+    x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
+    
+    print('Convert class vector to binary class matrix '
+          '(for use with categorical_crossentropy)')
+    y_train = keras.utils.to_categorical(y_train, num_classes)
+    y_test = keras.utils.to_categorical(y_test, num_classes)
+
 
     print('Constructing model!')
 
@@ -189,7 +196,11 @@ if get_transcript:
             print(i,label,test[i],test_comments[i])
             print(i,test_comments[i+1])
             print('-----------')
-            
+    output =  open('sentence-classification/senClass_predictions.txt','w+')
+    print('Start overwriting previous predictions in .txt file')
+    for p in test:
+        output.write('%s\n' % p)
+    output.close()
 else:
     test_comments, test_comments_category = get_custom_test_comments()
     
