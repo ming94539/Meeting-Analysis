@@ -165,6 +165,11 @@ def get_transcript_sentences(dialogue_str):
     dialogue_str = dialogue_str.strip()
     dialogue_str = dialogue_str.replace("\n", " ")
     sentences = sent_tokenize(dialogue_str)
+    if len(sentences) == 1:
+        print('NO PUNCTUATIONS!')
+        from deepsegment import DeepSegment
+        segmenter = DeepSegment('en')
+        sentences = segmenter.segment_long(sentences[0])
     return sentences
 
 

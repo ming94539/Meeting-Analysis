@@ -1,0 +1,456 @@
+Yeah guys good morning good evening everyone and today we
+are going to have the 80 RB review done for
+the wire project
+So this project is from the CD org and below
+are the details of the technical lead architect project managers
+And the problem statement here is that currently we don't
+have anything for a short URL and the QR code
+generator kind of tool in VM Ware
+And through the via project what we're trying to do
+is have a common portal kind of platform created where
+whoever needs can come and have short URL provision and
+at the same time can have the QR codes created
+for them we do have a short URL service in
+VM Ware at URL dot PNG but that is going
+to be deprecated soon or to answer more it will
+get merged with fire in the future
+So Mostly this is like for shortening the URLs and
+the QR code generation at the same time this particular
+platform is going to provide you the annals metric information
+as to flow where all the requests are coming the
+metric informations and it will have a lot of options
+to have the user configured rules being configured for a
+particular short URL So yeah it's just cover the short
+URL and the QR code generations
+It will have one admin portal kind of controls and
+a list of back end service we expect the acilius
+to be less than a second
+So how long this tinyurl is valid
+Uh it will be So those all can be defined
+by the rules actually like the user wants right I
+think it is a good question like they can set
+the number of hits that they want this URL to
+be accessible only 50 times they can even set a
+rule that is URL gets expired after this particular date
+So those all guns under the rules which the user
+can go and configure in the portal the VR portal
+Place some kind of a default so that we don't
+end up clogging it with people who don't care and
+submit tons of them
+I Yeah you heard the question John is asking
+Now how can we the one thing is John is
+asking me right John is it defaults and also how
+do we stop someone submitting too many requests That there's
+actually two pieces 2 pieces of that but but yeah
+the the big one is also I'd be kind of
+curious to know what the target domains are intended to
+be So the first question on what if somebody is
+creating a lot and not studying exploration we don't either
+way we don't plan on reusing the codes once they've
+been created and even not at 5 we're converting converting
+from base 10 to base 62 to generate the code
+so even at 5 characters we could have
+Uh I believe was over a billion uh possible codes
+so um So we're not storing these per say other
+than just logs in the web server
+Rachel Or we I think I think I can try
+to answer this party so for every everyone that's requested
+right so it's the user attempts to shorten URL it
+takes their URL and it places it in a database
+and it generates a base 62 ID that had been
+returned so and when there is a look up on
+that short URL it uses that to to keanan index
+in the database to retrieve the full length URL so
+yes we are we are storing all that data but
+each entry is a simple mapping of one long URL
+to agree but Do you have a way to expire
+stuff when it hits a certain date 'cause if you
+just let it
+If you if you offer the default of no expiration
+then people will take that as the default never kill
+me
+Your database will fill up with stuff that's dead so
+have you built in anything to detect dead ones that
+you can prune or have you or what are you
+considering around that
+I mean since we are gathering metrics on them theoretically
+we could you know see if nothing's if there's a
+few that are really old and they're not getting any
+clicks we could put that into the user the user
+info say hey you know if your link doesn't get
+X amount of clicks after this amount of time then
+it will just get deleted
+But they currently there's that's not implemented anywhere but we
+would have the ability to see that data that actually
+would be a great default you know inactive links for
+30 days or automatically prove Your database would never outgrow
+it till usefulness or something or maybe maybe 90 days
+or something like that so you could even do a
+year I mean yeah that would be as long as
+you prune it that would be probably a good idea
+yeah and like I said currently that's not a part
+of it but that's definitely something that's when the technical
+limitations at this time
+And the users do have the option that the users
+will see all the shortened URLs that they created when
+they log into the portal so they will have the
+ability to see hey these are really old and or
+not use anymore I can go in and delete them
+So you might even be able to make out so
+it makes some like default reporting options or something to
+make the hey this one was really dead floated to
+the top and you know do you want to kill
+this you know Nobody is accessed this index in mountain
+time yeah exactly exactly exactly yeah it's sorted sorted by
+popularity reverse you know and let him know hey yeah
+you have something there John yeah definitely we can take
+this to our product managers and he can work with
+the teams to set out the expiry maybe he won't
+expire he will send it after the expiry to the
+person who created 2
+Whether we want to extend it or not and if
+that person doesn't return 30 days then maybe we expire
+but here we can add those default rules in 90
+days or even a year as long as you just
+give it a finite length of existence it would be
+just better it would be better for this overall period
+I think that would be great to have like an
+automatic one year expiration unless it's popular less it's active
+yeah right yeah Are there any plans to integrate with
+any of these tools like confluence orgera so that their
+then user coming to the va.com and punching those URL
+and get the TinyURL is there any easy integration with
+these tools where they can click on share button it
+will automatically do
+Uh an option to make it any URL are there
+any plans or is it a standalone service that's a
+good solution banker Think of that if we do plan
+on having the developer API so that we can integrate
+their tools with this service as well
+So under testing take advantage Yeah yeah the plan originally
+was to you know this is a user end user
+application for you know just available on workspace one but
+obviously we're going to expose an API to be used
+by other applications of VM Ware 'cause I know there's
+several off the top of my head that use QR
+codes and some that even use short URL shorteners so
+the idea was to make this sort of the core
+central service for everything short URL in QR within VM
+Ware
+Yeah so another question I have is on the security
+aspects so many of our pages has a token sorino
+URL has having a token for APIs
+Will there be an issue
+With our two sharing across I mean the guy whoever
+sharing should be responsible for it but I know that
+but
+Yeah we need to see storing those tokens as part
+of URL
+Right so actually that's one of the things that we
+view as one of the benefits of the service because
+the alternative is somebody uses Bitly or some other online
+URL generator that isn't secure that isn't posted on VM
+ware's network and those tokens are getting stored in somebody
+elses data center so that's one of the benefits of
+building this internally is all of this will be secured
+in a VM Ware data center yeah I used UUID
+generator I used Jason formatter online I used XML formatter
+yeah I use a lot of them OK
+Very Yeah
+I OK so this is the V architecture and pretty
+much we're going to have one admin portal that will
+be the VR console that would be accessible internally only
+and would have the VM authentications and then we are
+not trying to use vmware.com we will have the vr.bmw.com
+Set up And To make the URL as short as
+possible because the QR code that is generated the shorter
+the URL the foster the scan is of the QR
+code and it will come to the vehicle service where
+it will have all the rules engine rules created and
+it will give the redirect URL for the re direct
+purpose you plan to have it stored in the corporate
+mongo DB we're going to request a collection over there
+And for faster processing we're going to have the data
+put in red is cash
+So yeah that's very nice can I ask what are
+your plan target domains are is your rewrite domain gonna
+be via via whatever VM W com that's awfully long
+If I was doing it
+Via.vmw.com/it will be like whatever the user provided code right
+Miss they can have their own code also or it
+can be an auto generated one in like 4 to
+5 digits characters
+How about VM www.io My very short URL
+For you characters on 6 characters
+Well it was if this has any run runtime here
+it's going to get up to
+A lot more characters than that eventually right How many
+can this grow to it's not it's not limited there's
+no technical limitation but we I mean in the in
+the object of keeping everything as short as possible we
+looked at 5 just to start and that gets us
+up to like I think 500 million or so
+So you're signing these things in order
+A smore somewhat yes but there's more to it than
+that So I guess yes there's like a you know
+account in the database and that gets converted to a
+base 62 format of that number and obviously you know
+there's sanitation and stuff like that so that the number
+system doesn't generate unsavory term or something like that but
+yeah they are sort of going in order ineffective according
+to the base 62 number system
+So are you multi DC deployment tomorrow yeah so the
+deployment would be active passive and it will be deployed
+in our city org only the one caleon demo'd last
+80 RB And we are going to have the CDC
+as our primary and double DC's passive so the whole
+setup is done for the CD platform we have both
+the namespace created in both of the production clusters
+And we also have a DNS setups also being done
+there we are using dyna DNS and they had to
+move to NS one so yeah it will be pretty
+much the CD setup that is being done and all
+the applications would be on those clusters
+I
+So it's a releases independent clusters it already is
+Where is this going to be hosted internally I cedec
+cluster an internal VIP why not
+Is there a reason we're not looking at 10s yeah
+no no no so definitely cancel I think Charlene also
+asked this question in the ID RV so the first
+thing what happened was that when we were publishing the
+whole this setup for the CD org we went to
+lynceus team to get that answers that have done actually
+that was our first choice but it seems we at
+the same time our VM applications were also getting migrated
+and all the other applications so we had a requirement
+for like around 100 CPU's 200 We ran something of
+that
+And that gets multiplied by all the environments dev test
+and all so I think then so and the teams
+are working on getting that hardware and all provisioned
+And once that is being done we have over requested
+cute available it will be an instance which so as
+of now the applications that we are deploying is why
+I see a CDC I pipelines using the GitLab ones
+and we don't have any dependencies on deck as such
+actually if it works on tag it should work on
+time so also So once that thing is provisioned bailenson
+monestime's it should be pretty much we will be moving
+all over workload there but right now it is on
+deck because that were very quick to give us whatever
+we requested
+So is there a reason why we're not using CDN
+We are not using is there any reason why we're
+not using any content delivery networks so that is Syrian
+is used actually so we're using the Akamai CDN and
+when they requested the Akamai it resolves by other GTM
+for active passive one the dyna DNS
+OK it's not there in the diagram that's why he
+hasn't shown that slide yet no nights my bad I
+have not added there
+A super ticket this is a container application right yes
+it's the container application
+So what is your OS image
+For your application for your containers OK so I think
+for that we are using the bitnami Java image
+That's what we will be using the bitnami version but
+I'm looking forward like do we have anything
+Specific to use Yeah there's a conference page from the
+open source program office at VM Ware
+They have pool containers OS approved it is a photo
+S or Debian
+He you know I think that's a good thing yeah
+who am I talking to I can send you a
+link yeah yeah sure Oscar definitely that's I think I
+was not aware actually but we used bitnami once but
+definitely please send us actually and we will replace those
+Vietnamese one with the one you gave OK yeah
+There are three predictions actually I'm Jay pratic Oscar like
+my lot of mails are going at wrong please
+OK let me let me just put it here in
+the in the chat here OK cool I will get
+it thank you
+I So for the Akamai that you're using you are
+enabling WAF
+Besides a CDN right Laugh I don't get it what
+is raft What application firewall
+Whatever the standard rules those are there for all This
+is on premise so the firewall is our web application
+firewall Um
+These are the crossing the pans So he's taking care
+of all the tickets
+Although sad Yeah I like the diagram is a little
+confusing there 'cause it looks like we're going through again
+to show you the how it would be actually yeah
+it looks like we're going through DNS to go in
+but
+I know quickly actually to make it very easy
+I should have used this diagram so pretty much the
+architecture is in place of incapsula it is Akamai which
+used the diner DNS to resolve to one of the
+data centers and right now it resolves to the AC
+DC-1
+It hits the external Lt MFI and then the engine
+exo server over there and from engine exits directly pointing
+to the deck ingress controller
+You should have put this in yeah Yeah
+So with what villages are the parts running on the
+cluster is it root
+Yeah that doesn't have Arbor control now so it's root
+the cube configs yeah so we might need to implement
+our security context for better are back right
+Yeah I want to I want I wanted to ask
+yeah in regards to that was the when you do
+the DMV crossing from the external IP to the internal
+IP is that a cleartext crossing or is this a
+encrypted cross
+From external web proxy into the VMware cloud foundation like
+if we stay right here let's see if so it
+terminates at the internal web actually the one that is
+being provided by the deck
+So it is all HTTPS and it gets terminated at
+the internal web so no my concern is now when
+you
+Enter into the network
+And you go Here OK OK is this do we
+have a cleartext connection when it crosses
+Well I see you showing this is an NSX edge
+but this is our this is crossing our Palo Alto
+boundaries so the question is is when you go this
+way is this a clear text or is this a
+encrypted protocol coming out of the engine X proxy
+So from Angie next to the if it will be
+an HTTPS after that once it hit the deck ingress
+that's the NSX edge internal that will be the deck
+ingress here after that internally it will be HTTP so
+between engine X and the NSX edge what that is
+being shown it will be an HTTPS traffic excellent OK
+yeah so so basically if we have the pans on
+this border here which we do then everything will be
+clear text in the threat prevention will be able to
+protect us yeah so definitely feel internally It is it
+is the same architecture everywhere in all the applications at
+internal level only we get the web the HTTPS termination
+I just wanted to validate thank you Yep
+I
+Ah
+I Oh cool guys I'm just
+It's also for for your
+A continue environment where you
+Storing your images were you getting the registry oh the
+engineering Jeff log
+OK the the one for marindi yeah yeah trust me
+we went with harbor and all and it was really
+painful and the engineering chief frog is through very much
+reliable one actually Yeah So are the images they signed
+I mean are they using notary for signing or images
+Come on Mr good thing what I like about is
+that once you have the image pushed with the label
+it cannot be overridden by anyone actually
+And that being signed I am not sure I can
+check on that
+OK yeah but that's really a good benefit with those
+guys like once you load an image it cannot be
+modified so I'm really sure trusted when I take those
+to production that nobody can tamper with it
+I So um I are using service accounts to access
+to your parts
+Or Like trouble troubleshooting that using SSH or how how
+you service account so as I mentioned it's a cube
+conflict so that's like a root access pretty much and
+if you want to troubleshoot the issues mostly all the
+logs goes to the centralized log inside so we troubleshoot
+into the log inside hardly we need to do SSH
+into the containers it's mostly like the yeah go ahead
+But you have that capability so basically if you contain
+is compromised you can
+And have privilege to get into the house
+Is that what you are I
+Miss the containers can be compromised we can get into
+the containers but I don't think from containers will be
+able to access the host layer the VMS you talking
+about the VMS underlying it right yeah yeah
+I think that should not be possible actually missing we
+can do as miss that's pretty much deck is providing
+and every containers in whatever the namespace they have right
+I just hope your deck is giving you those lines
+or did the controlling all those access or you are
+doing that
+Yeah because the way my queue configure is right I
+have just access to my namespace only
+Not any other names face so they have at least
+that level of restrictions OK yeah so there are various
+others ways or in which an escape can happen how
+even from a container to the host right or so
+first thing we want to ensure here is that we
+are not running it with root privileges As for the
+difference in their policy right so for that to what
+you need to do is kind of you need to
+define a security context in your manifest so as you
+are not running any other parts with higher privileges than
+it's required
+On top of that you also have to enable her
+apartment seccomp and other other kind of security Linux security
+features
+OK so those are in my docker images I need
+to have it run as an app user or something
+to make sure it doesn't run as root right right
+yeah yeah definitely will have that followed actually
+With a do we have some wikis where we can
+just use it if it's a standard guidelines like we
+got from Oscar
+I can have that like this would be standard practice
+right yeah I have a conference page for this application
+Let me put a yeah so we'll just use that
+process in standard having the app user or whatever the
+user specified created and have it run using that user
+so yeah that's the one I have is more generic
+like version spaces their credentials are sort of secrecy know
+that car services team they are developing a meteor attack
+framework for communities History is ready but you can use
+what I can do is let me give you my
+conference patient then you can take a look at So
+by those good if TMC is used there a few
+features that are provided by default or like their various
+restrictions on the namespaces or pod security policies and others
+but then on top of that also their future like
+you know they also have a capability to run CIS
+benchmark or checks right on all of the platforms but
+on top of that obviously will have to do your
+part when it comes to restricting the user access and
+now
+I I Oh God that niche
+Yeah that's right you saying something about that answer right
+yeah yeah
+OK so yeah that's what I heard my first question
+you cancel team also that the best thing they can
+provide would be the hardware control which is missing in
+the deck platform And we can have all the standard
+practices there actually for all the projects going there
+Yeah Sure
+So I may get that app user armor metric from
+U dot nish who members talking to sharing the confluence
+link
+Would be awesome Top of that if you need any
+information we can always help you out with that OK
+Oscar OK cool yeah yeah let me let me I'm
+finding my leg and then I'll put it in there
+OK no worries Oscar feel free to bring Landon
+OK yeah then yeah we can skip through the infrastructure
+since you already went through right here be so you
+can go through the operation and maintenance
+Yep Yes is it is short URL service give Al
+Gore generations
+The monger the backup requirement the mongo DB it's a
+corporate mongo DB so they have a replication backup strategy
+will be pretty much relying on that
+And the service owners will be Scott Steven and Gary
+from our emerging checkpoint team
+Flashlight
+Yep thank you Andre Thank you any other questions for
+particular
+Alright thank you Thank you thank you guys so much
+it was really good to know a lot of things
+actually
+Thank you particular so we do

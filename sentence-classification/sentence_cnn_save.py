@@ -31,6 +31,10 @@ from keras.layers import Conv1D, GlobalMaxPooling1D
 from keras.preprocessing.text import Tokenizer
 from nltk import word_tokenize
 
+import spacy
+spacy_nlp = spacy.load("en")
+
+
 #python3 sentence_cnn_save.py models/cnn path_to_transcript
 
 get_transcript = False
@@ -178,8 +182,14 @@ if get_transcript:
             label = "COMMAND"
             if len(word_tokenize(test_comments[i])) < 3:
                 continue
+            #doc = spacy_nlp(test_comments[i])
+            #for ent in doc.ents:
+                #if ent.label_ == "DATE":                  
+            print(i,test_comments[i-1])
             print(i,label,test[i],test_comments[i])
-
+            print(i,test_comments[i+1])
+            print('-----------')
+            
 else:
     test_comments, test_comments_category = get_custom_test_comments()
     

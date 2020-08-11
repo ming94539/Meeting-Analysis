@@ -18,6 +18,10 @@ dialogue_str = dialogue_str.strip()
 dialogue_str = dialogue_str.replace("\n"," ")
 print(dialogue_str)
 sentences = sent_tokenize(dialogue_str)
+if len(sentences) == 1:
+    from deepsegment import DeepSegment
+    segmenter=DeepSegment('en')
+    sentences = segmenter.segment_long(sentences[0])
 #Get Vocab Dictionary for tokenization in next step
 with open('vocab.csv',mode = 'r') as infile:
     reader = csv.reader(infile)
@@ -25,7 +29,7 @@ with open('vocab.csv',mode = 'r') as infile:
         writer = csv.writer(outfile)
         word2idx = {rows[0]:rows[1] for rows in reader}
 #print(word2idx)
-#Tokenize all the sentences
+#Encode all the tokenized sentences
 total_tokenized = []
 max_length = 0
 ps = PorterStemmer()

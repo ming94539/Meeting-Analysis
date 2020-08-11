@@ -1,0 +1,1482 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.970
+Kunal Ahuja: You know, monitoring or framework across users.
+
+2
+00:00:03.360 --> 00:00:04.230
+Kunal Ahuja: Will have to
+
+3
+00:00:05.069 --> 00:00:10.320
+Kunal Ahuja: Basically have the status is in mind, right, to just to keep track of all the users where they take go actually
+
+4
+00:00:11.910 --> 00:00:18.600
+Kunal Ahuja: So that is what is known as an action item. So if I show you. So I'm going to query for a blanket query kind of thing, how it looks like.
+
+5
+00:00:42.840 --> 00:00:47.280
+Kunal Ahuja: I mean, I don't do this one. It's just for us a desire to achieve this much to
+
+6
+00:01:01.080 --> 00:01:02.520
+Kunal Ahuja: Okay, so you see this
+
+7
+00:01:02.940 --> 00:01:15.480
+Kunal Ahuja: This is basically your single user report. See if you have it, it has your tracking ID record ID right when it created and then it has your who, what, and then use its type quantity. What is a said
+
+8
+00:01:16.050 --> 00:01:16.530
+Pallavi Vanaja: Right. Yes.
+
+9
+00:01:16.710 --> 00:01:27.420
+Kunal Ahuja: All of these details are nothing but consumption items not talking about the status. It could be in these falling status as if you see it accepted items you know rated rated rated means this has been
+
+10
+00:01:28.590 --> 00:01:30.120
+Kunal Ahuja: This has been considered for billing
+
+11
+00:01:31.260 --> 00:01:31.650
+Pallavi Vanaja: Right.
+
+12
+00:01:31.920 --> 00:01:34.860
+Kunal Ahuja: unrated means this is still pending for billing right
+
+13
+00:01:35.310 --> 00:01:41.790
+Kunal Ahuja: Or a table means also it has been pending for billing, or I mean this this is valid for a billing company.
+
+14
+00:01:42.630 --> 00:01:48.600
+Kunal Ahuja: Or audit is some some state of basically in SAP some great acting or something. Same as accepted right
+
+15
+00:01:48.990 --> 00:01:57.000
+Kunal Ahuja: Now you might see this road accepted. There are a few other codes that SAP defined and we asked for, for that. That is V1 and V2. Right.
+
+16
+00:01:57.720 --> 00:02:01.920
+Kunal Ahuja: On the one is basically or you remember duplicate check we do intimidation zone itself.
+
+17
+00:02:02.310 --> 00:02:02.910
+Pallavi Vanaja: Yes, yeah.
+
+18
+00:02:03.270 --> 00:02:11.580
+Kunal Ahuja: There's a second level of defense and sap itself for the same logic, save the record ID and quantity is same, it's going to mark that record is to plug it in, SAP also
+
+19
+00:02:12.090 --> 00:02:13.920
+Kunal Ahuja: Just not be applicable for dating.
+
+20
+00:02:14.580 --> 00:02:15.150
+Pallavi Vanaja: Correct, yeah.
+
+21
+00:02:15.420 --> 00:02:17.340
+Kunal Ahuja: That's the case was wearing the adjustment of
+
+22
+00:02:17.340 --> 00:02:20.340
+Kunal Ahuja: coming through. So the record ID same, but the quantity is different.
+
+23
+00:02:20.340 --> 00:02:20.640
+Right.
+
+24
+00:02:21.750 --> 00:02:26.940
+Kunal Ahuja: At that time mutations one will lead to record through to SAP. Because for us. It's a new record, right.
+
+25
+00:02:27.150 --> 00:02:29.610
+Kunal Ahuja: The condition would obesity is recorded this quantity
+
+26
+00:02:30.030 --> 00:02:48.180
+Kunal Ahuja: At that time, this SAP little Margaret's a quarter recorders. He was the to the other flag. Right. So by default, that in order to be applicable for rating and automated fashion but billing the tech. Are there any adjustments and then they will rate it manually.
+
+27
+00:02:50.070 --> 00:02:51.960
+Kunal Ahuja: Now, this is what is consumption item. Right.
+
+28
+00:02:52.200 --> 00:02:57.870
+Kunal Ahuja: So I'm moving on to billable items. So what is billable item is you remove that overage logic.
+
+29
+00:02:58.440 --> 00:02:59.760
+Pallavi Vanaja: Yes. Yes. Yeah.
+
+30
+00:03:08.880 --> 00:03:11.280
+Kunal Ahuja: Okay, you remember over his logic. What is what
+
+31
+00:03:12.030 --> 00:03:18.810
+Kunal Ahuja: It is to club who what and when, according to a time and some of the users quantity. Right. Yeah. And then calculate the differential quantity. Right.
+
+32
+00:03:19.800 --> 00:03:21.420
+Pallavi Vanaja: He committed committed. Yeah.
+
+33
+00:03:21.720 --> 00:03:22.140
+That's right.
+
+34
+00:03:28.950 --> 00:03:40.470
+Kunal Ahuja: Yeah, so if you see it as billable item will have this is the one single line item for that logic rate when it will combine calculate the users quantity. Subtract with the comet quantity for our and derive the billing quantity. Right.
+
+35
+00:03:40.950 --> 00:04:01.140
+Kunal Ahuja: So what you can understand. Is your usage record to consumption item data set is one to one, but right but if from fit to bed or billable item will be your biggest one, and there can be many sets to contribute into one particular but or they could be a single right
+
+36
+00:04:01.200 --> 00:04:01.710
+Pallavi Vanaja: Okay.
+
+37
+00:04:01.860 --> 00:04:02.370
+Okay, so
+
+38
+00:04:04.260 --> 00:04:07.860
+Kunal Ahuja: If you see here you will have three columns here, right, if you see this huge quantity
+
+39
+00:04:09.000 --> 00:04:09.300
+Pallavi Vanaja: This
+
+40
+00:04:09.360 --> 00:04:09.840
+Kunal Ahuja: This one.
+
+41
+00:04:11.040 --> 00:04:12.840
+Kunal Ahuja: You see this comment quantity and then you have
+
+42
+00:04:17.310 --> 00:04:18.990
+Kunal Ahuja: Let me make it easier
+
+43
+00:04:24.900 --> 00:04:26.700
+Kunal Ahuja: This one has a very bad interface.
+
+44
+00:04:28.350 --> 00:04:35.190
+Pallavi Vanaja: Yeah, I see, I see like multiple deals you click. I don't know if it's just me, or even use it.
+
+45
+00:04:35.820 --> 00:04:44.490
+Pallavi Vanaja: Multiple I see multiple cursor's cursor icons one like the entire skin cream from the top to bottom. Every time you click
+
+46
+00:04:44.550 --> 00:04:47.400
+Pallavi Vanaja: I don't know if it's because of internet connectivity is just be
+
+47
+00:04:47.880 --> 00:04:48.870
+Kunal Ahuja: Your dad is for lag.
+
+48
+00:04:59.280 --> 00:05:02.580
+Kunal Ahuja: So if you see this right for this particular said right
+
+49
+00:05:03.000 --> 00:05:04.980
+Kunal Ahuja: For this skew or user data.
+
+50
+00:05:05.430 --> 00:05:16.710
+Kunal Ahuja: Right for this timestamp, there will be created on and add something timestamp from and do something. Right. Yeah. For us, it's going to do. That was some it
+
+51
+00:05:17.520 --> 00:05:29.610
+Kunal Ahuja: Was for this was for the comment was zero so customers know that could be a possibility, where in the comment you have some comic value. I'm not seeing any
+
+52
+00:05:30.930 --> 00:05:35.520
+Kunal Ahuja: test instance. So there could be some comic value and then the building owner will be some
+
+53
+00:05:36.630 --> 00:05:37.140
+Pallavi Vanaja: Estimate
+
+54
+00:05:38.160 --> 00:05:44.790
+Kunal Ahuja: Right, but at the time it is greater than us. It's already going to be zero because customers already paid, it's a non negative and
+
+55
+00:05:45.780 --> 00:05:48.180
+Kunal Ahuja: Yep. So this is what a bit looks like now.
+
+56
+00:05:48.360 --> 00:05:52.800
+Kunal Ahuja: If you want to see how many sets contributed to it. Basically you what you can do this.
+
+57
+00:05:54.720 --> 00:05:55.860
+Kunal Ahuja: There was some
+
+58
+00:05:57.450 --> 00:05:57.930
+Kunal Ahuja: There.
+
+59
+00:05:58.680 --> 00:06:00.690
+Pallavi Vanaja: Was something said reference
+
+60
+00:06:00.870 --> 00:06:01.320
+Kunal Ahuja: Yeah, there's
+
+61
+00:06:02.430 --> 00:06:04.380
+Kunal Ahuja: An item, right, if you click on this.
+
+62
+00:06:06.000 --> 00:06:08.820
+Kunal Ahuja: Show you that anyone sick, right. This is the consumption data.
+
+63
+00:06:09.150 --> 00:06:11.280
+Kunal Ahuja: So here you can have multiple sets also
+
+64
+00:06:11.700 --> 00:06:14.520
+Kunal Ahuja: Right now you're seeing a case and it's one on the right.
+
+65
+00:06:15.090 --> 00:06:18.600
+Kunal Ahuja: But again, one multiple sets, right. So this is how you're
+
+66
+00:06:19.980 --> 00:06:25.470
+Kunal Ahuja: SAP box right once is billable items is so this job of converting sets to bits so oddly job.
+
+67
+00:06:26.610 --> 00:06:27.450
+Pallavi Vanaja: Okay, our
+
+68
+00:06:27.510 --> 00:06:34.680
+Kunal Ahuja: It will go go from set to bit right and do that billing, but it for every customer, there are separate animals rebel India right
+
+69
+00:06:35.250 --> 00:06:36.090
+Pallavi Vanaja: Huh, yeah.
+
+70
+00:06:36.450 --> 00:06:39.180
+Kunal Ahuja: At the anniversary billing date it will rerun the whole month dollars.
+
+71
+00:06:42.360 --> 00:06:51.600
+Kunal Ahuja: Because, and it will recalculate because, for us it is for the previous time can come at the latest in also a bundle 90 days right
+
+72
+00:06:52.020 --> 00:06:52.950
+Kunal Ahuja: God will lead to legal
+
+73
+00:06:55.230 --> 00:07:00.600
+Kunal Ahuja: So this is just to give you an idea, somewhere if you're forming those monitoring dashboards or whatever you're
+
+74
+00:07:00.840 --> 00:07:07.920
+Kunal Ahuja: Planning to you might have to take this account at that time. You can again ping me I can give you a details.
+
+75
+00:07:09.570 --> 00:07:09.720
+Kunal Ahuja: Now,
+
+76
+00:07:09.930 --> 00:07:11.190
+Pallavi Vanaja: Surely they needed a little bit
+
+77
+00:07:13.260 --> 00:07:15.870
+Kunal Ahuja: So you you got this new hawk or the
+
+78
+00:07:16.140 --> 00:07:22.800
+Pallavi Vanaja: Access your base database. Yes. Yes, I did. So they shared the details, but I was told.
+
+79
+00:07:23.760 --> 00:07:43.830
+Pallavi Vanaja: By my teammates to use PG admin three, but I couldn't download PG admin three because my request and support. So I did. Be the admin for but I was not able to what is that setup a server, but she was able to. So I'm assuming it's something that I did something wrong with the connection.
+
+80
+00:07:45.390 --> 00:07:45.990
+Kunal Ahuja: So,
+
+81
+00:07:48.810 --> 00:07:51.780
+Pallavi Vanaja: Oh, so we don't have to do with that. I have no idea, actually.
+
+82
+00:07:52.080 --> 00:07:52.830
+Kunal Ahuja: So on is
+
+83
+00:07:53.490 --> 00:07:56.370
+Kunal Ahuja: The requirement. I mean, you, you're just trying to connect to or
+
+84
+00:07:56.430 --> 00:07:59.610
+Pallavi Vanaja: You need a good dude. Yes, exactly. Yeah. So if there's any other way.
+
+85
+00:08:00.540 --> 00:08:03.510
+Kunal Ahuja: You just need a client right use any of the databases client.
+
+86
+00:08:03.630 --> 00:08:05.760
+Kunal Ahuja: It's, it's basically posters on the date.
+
+87
+00:08:06.240 --> 00:08:07.140
+Pallavi Vanaja: Yes, yes.
+
+88
+00:08:07.890 --> 00:08:14.700
+Kunal Ahuja: So any claim, you can use a letter table plus or something right or whatever that dB. We were kind of thing.
+
+89
+00:08:15.300 --> 00:08:23.130
+Kunal Ahuja: Okay, and put the collection doodles and connect a connection there. Right, make a connection there. We do you have been provided for the server, right.
+
+90
+00:08:23.700 --> 00:08:29.850
+Pallavi Vanaja: Okay, so let me try that out so I can use any of the existing database clients, which basically supports.
+
+91
+00:08:29.850 --> 00:08:31.830
+Pallavi Vanaja: Postgres and then I set up a connection.
+
+92
+00:08:32.370 --> 00:08:32.820
+Kunal Ahuja: That's correct.
+
+93
+00:08:33.390 --> 00:08:43.950
+Pallavi Vanaja: Okay, I'll try that out. Yeah. Because even in the speech admin when I was trying to create it said create server. I was like, Okay, maybe I have to do something locally, because she seemed shout about it.
+
+94
+00:08:45.540 --> 00:08:51.780
+Pallavi Vanaja: And then she did see the tables, but I was not able to, so I thought I was doing something wrong. But yeah, it makes sense. Okay, let me try that out.
+
+95
+00:08:51.840 --> 00:08:57.780
+Kunal Ahuja: Yeah, unless you're hosting your own database, you might not have. I'm not sure what our PD admin might be walking
+
+96
+00:08:58.170 --> 00:09:01.650
+Kunal Ahuja: But I mean, you don't have to go that route to the state to see the data. Right.
+
+97
+00:09:01.950 --> 00:09:02.790
+Pallavi Vanaja: Yes, yes.
+
+98
+00:09:03.420 --> 00:09:04.650
+Kunal Ahuja: I think that should work.
+
+99
+00:09:10.230 --> 00:09:12.720
+Pallavi Vanaja: So, so which which client, are you using which
+
+100
+00:09:13.020 --> 00:09:20.670
+Kunal Ahuja: Database. This one is actually license based. This is from your, your brains only data, but
+
+101
+00:09:21.690 --> 00:09:25.800
+Kunal Ahuja: Earlier, we used to address or DVD and that's a pretty good client, you can use
+
+102
+00:09:26.370 --> 00:09:28.050
+Kunal Ahuja: This. OK, I can tell you
+
+103
+00:09:31.080 --> 00:09:35.040
+Kunal Ahuja: Just download this one and then you can connect was rescued us
+
+104
+00:09:35.610 --> 00:09:35.970
+Okay.
+
+105
+00:09:37.020 --> 00:09:37.980
+Pallavi Vanaja: Yeah, I'll try that.
+
+106
+00:09:40.170 --> 00:09:41.250
+Kunal Ahuja: OK, so now
+
+107
+00:10:36.540 --> 00:10:39.540
+Kunal Ahuja: So this is basically data that you would want to connect. Great.
+
+108
+00:10:40.470 --> 00:10:41.160
+Yes.
+
+109
+00:10:44.820 --> 00:10:56.610
+Kunal Ahuja: at GW hawk and data schema will be base right in basis for this might as every everything for Midas is basically with name is right now, the actual use it files.
+
+110
+00:11:02.190 --> 00:11:03.450
+Kunal Ahuja: Right, so
+
+111
+00:11:07.050 --> 00:11:08.430
+Kunal Ahuja: You see these two collections.
+
+112
+00:11:10.170 --> 00:11:10.590
+Pallavi Vanaja: Yes.
+
+113
+00:11:15.300 --> 00:11:22.530
+Kunal Ahuja: So this is basically your raw data right so viral. I mean, when the fire comes to us right now maybe
+
+114
+00:11:24.420 --> 00:11:28.140
+Kunal Ahuja: We leave it for a DW to flatten this data and store it.
+
+115
+00:11:29.040 --> 00:11:29.370
+Pallavi Vanaja: Okay.
+
+116
+00:11:30.000 --> 00:11:33.600
+Kunal Ahuja: So basically this is complete ravages of file which we MC sending
+
+117
+00:11:34.740 --> 00:11:35.250
+Pallavi Vanaja: The exact
+
+118
+00:11:35.580 --> 00:11:36.510
+Pallavi Vanaja: The Jason not
+
+119
+00:11:37.530 --> 00:11:40.170
+Kunal Ahuja: Based on that is balls out in call column no structure.
+
+120
+00:11:40.500 --> 00:11:42.090
+Pallavi Vanaja: Cartridge okay right
+
+121
+00:11:42.750 --> 00:11:49.290
+Kunal Ahuja: Then you have another one which is your Midas data. So you remember for every file. If there are adults used to identify
+
+122
+00:11:50.880 --> 00:11:55.050
+Kunal Ahuja: This particular collection or this particular table will have all the Arabic courts.
+
+123
+00:11:56.040 --> 00:11:56.550
+Pallavi Vanaja: Got it.
+
+124
+00:11:56.910 --> 00:12:05.670
+Kunal Ahuja: Okay. Oh, for an example. This is the actual or all file for the user data. So if you see the corrugated I can add some whatever you get in JSON payload will
+
+125
+00:12:05.670 --> 00:12:07.170
+Kunal Ahuja: Happen. Right.
+
+126
+00:12:08.040 --> 00:12:09.720
+Kunal Ahuja: Now if you want to see the other one.
+
+127
+00:12:21.930 --> 00:12:31.140
+Kunal Ahuja: You have again the same days on the record. But we have the error of the embedded in that. So if you scroll down to the store do right we'll see this ad format. Right. What is there.
+
+128
+00:12:32.160 --> 00:12:32.580
+Pallavi Vanaja: Okay.
+
+129
+00:12:33.090 --> 00:12:33.360
+Right.
+
+130
+00:12:34.500 --> 00:12:38.100
+Kunal Ahuja: Well, now if you want to find how many successful just subtract from this to this, right.
+
+131
+00:12:41.580 --> 00:12:49.350
+Kunal Ahuja: But this is our to our user data. Now, this is pretty much for the user is now you will have to get as a media dollars right
+
+132
+00:12:49.590 --> 00:12:59.310
+Kunal Ahuja: So I guess, as he has enabled so relative like I don't know the tables exactly for that. But somehow. So let's say one of the requirements that I we keep on hearing great customer is complaining about the user so
+
+133
+00:12:59.640 --> 00:13:09.450
+Kunal Ahuja: If you drill down, someone will ask our reach, or you're submitting all the users to SAP right so that's what we love to do is basically love to get each and every record it from this user data.
+
+134
+00:13:10.050 --> 00:13:29.520
+Kunal Ahuja: Join with your set data, right, the TSA every, every record exists in a city. So my job is clearly done right. But now this is just awesome dividers SAP does not maintain all the data in one table that is a problem. They play with the data between the tables on
+
+135
+00:13:30.540 --> 00:13:34.620
+Kunal Ahuja: There are a number of transactions. Right. So you remember that status. I told you about.
+
+136
+00:13:35.640 --> 00:13:45.540
+Kunal Ahuja: So they have status quotes in the back end like 1234 kind of thing there is already, we are in. We have to derive what is actually happening. I'll share the link of the story.
+
+137
+00:13:46.050 --> 00:13:59.550
+Kunal Ahuja: Prakash has for you that will give an idea how SAP plays with the data, right, so let's say once the user is created in the form of certain SAP initial status will be two by two. I'm into the corresponding to rate table. Whatever I should
+
+138
+00:14:00.570 --> 00:14:11.610
+Kunal Ahuja: Do now once SAP has created a bit for it. The status will change to four. Okay. Yeah, but that's it will be moved from one table to another table.
+
+139
+00:14:12.450 --> 00:14:13.440
+Pallavi Vanaja: Okay, okay.
+
+140
+00:14:14.910 --> 00:14:27.060
+Kunal Ahuja: Now it has been created. Right. Everything is fine. Remember that one statement I made at the end of the month for the me was rebelling date. It's going to read it. Everything
+
+141
+00:14:27.450 --> 00:14:27.840
+Pallavi Vanaja: You need
+
+142
+00:14:30.270 --> 00:14:34.410
+Kunal Ahuja: To talk over each other. It will calculate over it again for the whole month right
+
+143
+00:14:34.560 --> 00:14:50.820
+Kunal Ahuja: Yeah, how it does it. It basically goes back from it basically goes backs stepwise, for example, whatever. It has been created, it's going to move that sit back to the older table and then the rearrange and kind of thing, right. So,
+
+144
+00:14:51.120 --> 00:14:57.630
+Kunal Ahuja: Basically market as invalid and then related. So there's some internal logic that as a place and it moves on data from one table to another.
+
+145
+00:14:57.930 --> 00:15:08.340
+Kunal Ahuja: So if I say you does get me all the records from this to that it might not be easy. You have to understand that logic, right, that kind of query to fetch the exact data from SAP and then map it with this user data right
+
+146
+00:15:10.170 --> 00:15:19.950
+Kunal Ahuja: So, okay, that's good complexity, how it's done this, you might not need it right now. Whatever your use cases or even depending on that. But does give you an idea, this is one of them.
+
+147
+00:15:20.430 --> 00:15:30.810
+Kunal Ahuja: Gets item, and I'll share you the JIRA stories of packages mentioned in detail how SAP does that because we actually played it with and then find found our own on our own right.
+
+148
+00:15:31.290 --> 00:15:31.740
+Kunal Ahuja: We'll get to
+
+149
+00:15:32.040 --> 00:15:35.610
+Kunal Ahuja: Those details that is one second is basically
+
+150
+00:15:36.630 --> 00:15:44.940
+Kunal Ahuja: I'm just giving us this problem. Now, second is basically a simple question from customer customers. I'm not sure my users are correct on my bill is correct. Can you please confirm
+
+151
+00:15:45.660 --> 00:15:52.200
+Kunal Ahuja: Right in that case is building ops will do their research and then they'll come back to us, okay. I'm fine, finding this discrepancy right
+
+152
+00:15:52.590 --> 00:15:56.910
+Kunal Ahuja: So we have to do a number of shares, basically. Okay, this is what we received. This is what we did and
+
+153
+00:15:57.450 --> 00:16:04.920
+Kunal Ahuja: Sometimes they'll say, No, I don't think, again, this is no this is incorrect to relax. Okay. Let's confirm from service. What is the users quantity, they gave us right
+
+154
+00:16:05.460 --> 00:16:16.860
+Kunal Ahuja: So now here. There are three sources right one is actual service who submitted the users. Yep, second guess as a mediation zone. Did we submit them correctly. Third is, what did sab to witness
+
+155
+00:16:19.050 --> 00:16:28.380
+Kunal Ahuja: So all these three should be in single frame which is not happening. If we are able to bring this and single frame half of the problems is one for finding out what happened to that particular users, right.
+
+156
+00:16:28.830 --> 00:16:37.410
+Kunal Ahuja: So this one, I'm very oversimplifying it. It's not that easy. There are a lot of use cases. So, and this requires a lot of time as well. Right.
+
+157
+00:16:37.650 --> 00:16:45.930
+Kunal Ahuja: And our limitation as a noise. Let's assume services service will not give us that data as of now, so you need to rely whatever files are giving
+
+158
+00:16:46.260 --> 00:17:00.510
+Kunal Ahuja: Right, baby, basically, how do you make sure that services also submitted. All right, you can just allow on whatever you are receiving right so your flow will start wearing what have you received and whatever you invested in SAP that should be accurate.
+
+159
+00:17:01.470 --> 00:17:15.090
+Kunal Ahuja: Yeah, right. So that one, one does. So this is another problem replicate a lot of mucus lot of a lot of issues for this one I guess another problems. I'm not sure if you're ever for the on demand said send everything
+
+160
+00:17:16.890 --> 00:17:17.340
+Kunal Ahuja: To them.
+
+161
+00:17:18.780 --> 00:17:19.110
+Pallavi Vanaja: Yeah.
+
+162
+00:17:20.220 --> 00:17:20.910
+Pallavi Vanaja: I think
+
+163
+00:17:22.920 --> 00:17:31.290
+Pallavi Vanaja: Yeah, I think I'm aware of couple of issues that party mentioned and Arjun mentioned, but all of them were evolving more about more around the
+
+164
+00:17:31.830 --> 00:17:45.840
+Pallavi Vanaja: Usage and billing issues and and how we MC sends information and all that. One of it was basically just the AWS skew mapping and the skew and DMC skews mapping issue.
+
+165
+00:17:46.290 --> 00:17:47.460
+Pallavi Vanaja: Which was not updated.
+
+166
+00:17:49.410 --> 00:17:54.090
+Kunal Ahuja: So what I'm gonna do is if you want. I'm going to share one wiki with you.
+
+167
+00:18:10.650 --> 00:18:16.500
+Kunal Ahuja: This is ongoing issues this game warden and us out. Don't go with every each each and every cases.
+
+168
+00:18:16.890 --> 00:18:21.840
+Kunal Ahuja: But there's a lot of visual that why have multiple on demand skew what happened, right. Yep.
+
+169
+00:18:22.500 --> 00:18:29.400
+Kunal Ahuja: So if you just want to go, just go through this and this is, this will give you a very good problem statement, what you can think of right
+
+170
+00:18:30.180 --> 00:18:30.780
+Pallavi Vanaja: Okay, yeah.
+
+171
+00:18:30.990 --> 00:18:48.000
+Kunal Ahuja: Oh, in this three services are enormous DMC CSP and it right so users is one part of it before us. It is a subscription has to be created successfully. Right. Yes. Yeah. There are very much core. There are very much difficulty than that, whether they were to on demand created by, you know,
+
+172
+00:18:49.500 --> 00:18:56.190
+Kunal Ahuja: Which should not have happened. The user will start flying before the subscription but activated and rejected them right. Those kind of
+
+173
+00:18:56.820 --> 00:19:03.840
+Kunal Ahuja: This, this, and then if you want, or we will have a separate session. I'll give you a overview of our main i mean
+
+174
+00:19:04.800 --> 00:19:15.990
+Kunal Ahuja: Typical issues that we face, right, that will give you, but example. This is very this to active on demand. Now, I guess now it has reduced, right. So, there cannot be to add on demand side if you remember
+
+175
+00:19:16.740 --> 00:19:17.490
+Pallavi Vanaja: Yes. Yes. Yeah.
+
+176
+00:19:17.910 --> 00:19:30.180
+Kunal Ahuja: So this one right user start date is after you that on demand start date is after these objects. So basically, your user is submitted with a date or a priority or subscription started. So we are rejecting as a part of business.
+
+177
+00:19:31.230 --> 00:19:36.180
+Kunal Ahuja: That even if it's happening is because they started because at the time of subscription creation and a division.
+
+178
+00:19:36.570 --> 00:19:46.110
+Kunal Ahuja: There were some failures than manual intervention and after finding out. They started subscription at a later point of time but service started to collect use it this prior to that.
+
+179
+00:19:47.190 --> 00:19:51.810
+Kunal Ahuja: Right. And so, and when they're submitting it's failing. Right. So you have to manually interfere and do the things
+
+180
+00:19:52.770 --> 00:19:59.400
+Kunal Ahuja: But this will give you a pretty good idea of what are the problems with me the MCC ESPN ideas.
+
+181
+00:20:00.450 --> 00:20:04.950
+Kunal Ahuja: Right. So one quick thing I'd like to mention is overage report. I don't know if you've heard about it.
+
+182
+00:20:07.980 --> 00:20:10.050
+Pallavi Vanaja: Something about building talk we'll talk
+
+183
+00:20:10.650 --> 00:20:12.030
+Kunal Ahuja: No, it's not about building dog.
+
+184
+00:20:13.110 --> 00:20:13.980
+Kunal Ahuja: It's basically
+
+185
+00:20:15.000 --> 00:20:16.200
+Kunal Ahuja: A different API.
+
+186
+00:20:17.730 --> 00:20:23.520
+Kunal Ahuja: Through with services, services are in a able to get their use ages. Right.
+
+187
+00:20:23.610 --> 00:20:33.810
+Kunal Ahuja: Okay. Basically, they can see what is over. It's coming out for that are right. So, whatever the big screen, you were seeing right so that big screen is given to service in the form of CSP.
+
+188
+00:20:34.980 --> 00:20:35.310
+Pallavi Vanaja: OK.
+
+189
+00:20:35.640 --> 00:20:45.960
+Kunal Ahuja: Ok ok and that that API that a bit screen is also interface to add blue from the web, our service which fits that data.
+
+190
+00:20:47.070 --> 00:20:56.910
+Kunal Ahuja: And give to basically whatever the columns are also we ever SAP Bob the interface implemented, where you can run the query to fetch that report, right, I mean,
+
+191
+00:20:57.150 --> 00:21:01.020
+Pallavi Vanaja: So this is the sap billable Item screen, you showed me
+
+192
+00:21:01.290 --> 00:21:08.880
+Kunal Ahuja: I mean their content will be that kind of thing. It's not a big data, but it's in a week or you can the content will give you that only the content and the deck will be almost similar
+
+193
+00:21:09.330 --> 00:21:10.680
+Pallavi Vanaja: Okay, okay. Yeah.
+
+194
+00:21:11.310 --> 00:21:19.470
+Kunal Ahuja: So billing ops also refer to that. So whenever a customer comes okay my user is not correct, they will go and check what other users.
+
+195
+00:21:19.920 --> 00:21:32.670
+Kunal Ahuja: As they will do that. And if they also find a discrepancy, or they're not able to understand, they'll come back to us right so that report, I mean that report still is correct, but we were trying to create another report, which is basically or bit to set right
+
+196
+00:21:33.060 --> 00:21:33.420
+Kunal Ahuja: Because
+
+197
+00:21:33.570 --> 00:21:47.790
+Kunal Ahuja: There are many complications theaters as you develop solve it and everything. So the one key factor that everyone wants us to enable is right from a dog right right from build up, they should be tracking to use the data or usage report.
+
+198
+00:21:48.780 --> 00:21:49.530
+Kunal Ahuja: For example,
+
+199
+00:21:49.920 --> 00:21:58.590
+Kunal Ahuja: In a build of answering for users item do DHS my total bill is this builder will not give you Ali Ali line items.
+
+200
+00:21:58.650 --> 00:21:58.860
+Like
+
+201
+00:21:59.940 --> 00:22:01.560
+Kunal Ahuja: It will give you some Asian right for this one.
+
+202
+00:22:02.610 --> 00:22:11.370
+Kunal Ahuja: For now requirement from building ops is basically this is my bill. How do I get, what are the users that contributed to this bill simple
+
+203
+00:22:12.240 --> 00:22:13.080
+Pallavi Vanaja: Okay, okay.
+
+204
+00:22:13.440 --> 00:22:16.680
+Kunal Ahuja: Simple hire 10,000 feet problem statement right
+
+205
+00:22:17.310 --> 00:22:24.660
+Kunal Ahuja: But now if you drill down from Bill Doc, you need to fetch the bits from bits you need to fetch the set. This is one part
+
+206
+00:22:25.110 --> 00:22:34.410
+Kunal Ahuja: That whatever SAP did this is second question is, are you adjusting everything in SAP correctly. So we're in the second part of the next part comes in, which I told you this before.
+
+207
+00:22:35.220 --> 00:22:42.360
+Kunal Ahuja: Ever we received as a form of user record completed might as you the radar to send data. That means everything was interested second
+
+208
+00:22:43.530 --> 00:22:51.990
+Kunal Ahuja: Part is when later service provides an interface to make sure that okay these are the users that aren't you can do you attach the first part.
+
+209
+00:22:54.060 --> 00:22:54.480
+Pallavi Vanaja: Okay.
+
+210
+00:22:54.570 --> 00:23:04.920
+Kunal Ahuja: Then you will get the sink in. But right now, if you, if we are able to go from billing doctor or user record in whatever we have in our ecosystem without servicing it's getting involved that also works best.
+
+211
+00:23:06.000 --> 00:23:07.200
+Pallavi Vanaja: OK. OK.
+
+212
+00:23:07.980 --> 00:23:16.200
+Kunal Ahuja: These are a few problems, but whatever use case you're building, you can just keep these into account or there might be some other also you're working with is totally independent data is completely fine.
+
+213
+00:23:20.160 --> 00:23:31.020
+Pallavi Vanaja: Yeah, yeah, no, this is a this is good information to know because right now we were kind of overwhelmed with all the data and all the processes and flows. So we
+
+214
+00:23:31.650 --> 00:23:42.930
+Pallavi Vanaja: So our first step that we would be taking is basically just doing like a visualization dashboard with trends. So we would try to. So looking at the data. We're trying and the
+
+215
+00:23:43.380 --> 00:23:52.560
+Pallavi Vanaja: Understanding of the flows and processes we are planning to build trends and visualization charts, which basically would give us information about how
+
+216
+00:23:53.010 --> 00:24:05.670
+Pallavi Vanaja: The usage or not just specific to usage, but as such the information that we have. If there's any discrepancy or anything that you can possibly get from the trend trend trend graphs.
+
+217
+00:24:06.570 --> 00:24:11.490
+Pallavi Vanaja: Yeah, so that's kind of what we are aiming for right now, and probably once we
+
+218
+00:24:11.940 --> 00:24:23.130
+Pallavi Vanaja: Do that we would have more information or understanding about how the data is waiting and changing and that would help us in identifying features which can then be used to build any models that could identify
+
+219
+00:24:24.120 --> 00:24:38.580
+Pallavi Vanaja: That that we can buy because basically, we need to feed them features for it, rather than just dumping all the data and that would be crazy. And it's too much data for any model driven process. So that's kind of what we have taken I decided
+
+220
+00:24:38.790 --> 00:24:46.560
+Kunal Ahuja: I mean, for, for example, if you just want to because I guess even I feel it, it will be a lot of information for you, ways to process.
+
+221
+00:24:46.620 --> 00:24:47.940
+Kunal Ahuja: And make note of it.
+
+222
+00:24:48.930 --> 00:24:49.260
+Kunal Ahuja: And it's
+
+223
+00:24:50.550 --> 00:24:52.500
+Kunal Ahuja: Better to start with a small problem.
+
+224
+00:24:53.580 --> 00:24:57.990
+Kunal Ahuja: And then once you understand that you can basically, you know, connect the dots slowly through that.
+
+225
+00:24:59.370 --> 00:25:05.040
+Kunal Ahuja: The thing is up. So a simple use case would be like if you want from us it as I get this data.
+
+226
+00:25:06.600 --> 00:25:14.490
+Kunal Ahuja: Give us a trend. Basically, this particular since you have a you won't have any customer names and uses that are simple. You don't have to do another collection also right
+
+227
+00:25:14.760 --> 00:25:26.250
+Kunal Ahuja: Yes, you have the data for this said last month this said reported as much quantity this monitor about it is quantity that discrepancy or the threshold is broken by this and might be a problem like this on.
+
+228
+00:25:26.610 --> 00:25:39.810
+Kunal Ahuja: Those kind of things constructed. Same goes for the billing rate for this customer the bill generally used to be X where X amount of dollars, but from last to hundreds of boredom boredom reduce or increase the value by this much for one day.
+
+229
+00:25:40.440 --> 00:25:42.210
+Kunal Ahuja: My problem goes no things
+
+230
+00:25:43.680 --> 00:25:46.770
+Pallavi Vanaja: Yeah, yeah, so that's that's kind of what we are aiming
+
+231
+00:25:47.850 --> 00:25:59.160
+Pallavi Vanaja: To do that with the information that we can get from Ed w. So, so you, you mentioned the usage tables and Ed w. So is that like said data customer information as well that I can get
+
+232
+00:25:59.460 --> 00:26:00.750
+Kunal Ahuja: Everything is needed a blue
+
+233
+00:26:01.290 --> 00:26:06.540
+Kunal Ahuja: All that information. See, I mean, once you have that data. Right.
+
+234
+00:26:06.930 --> 00:26:19.110
+Kunal Ahuja: Now you can go and browse the base schema. I guess there are tables for subscription and all, but since I have no i'm not owning that and I'm not logged on and so I don't know how they get updated and how much latest data they have right
+
+235
+00:26:19.260 --> 00:26:21.420
+Kunal Ahuja: Got something new for them. Right.
+
+236
+00:26:22.110 --> 00:26:27.210
+Kunal Ahuja: Another thing is. So this is from your SMB subscription data, but you have the data, pretty sure I'm pretty sure right
+
+237
+00:26:27.570 --> 00:26:32.100
+Kunal Ahuja: Now where did you can you know loop and someone from SMB, and then check
+
+238
+00:26:32.910 --> 00:26:33.930
+Pallavi Vanaja: Yeah yeah
+
+239
+00:26:34.710 --> 00:26:37.860
+Kunal Ahuja: Yeah. Second is all the SAP data is also available in intuitive.
+
+240
+00:26:38.550 --> 00:26:39.240
+Pallavi Vanaja: Right. Yes.
+
+241
+00:26:39.330 --> 00:26:45.390
+Kunal Ahuja: Yes, you do get hold of that almost every information, who is customer and
+
+242
+00:26:46.860 --> 00:26:56.400
+Pallavi Vanaja: Okay, yeah. Oh, you mean, you mean the sap tables which keeps changing. But that you said was very specific to usage or that even has a couple information.
+
+243
+00:26:56.460 --> 00:26:59.340
+Kunal Ahuja: Everything below the market will have everything
+
+244
+00:27:00.930 --> 00:27:06.120
+Kunal Ahuja: But it will be easier for you to get the subscription data for SMEs from SMB schema instead of sad.
+
+245
+00:27:06.600 --> 00:27:08.880
+Kunal Ahuja: Well, there may be related jobs, you can get from the city.
+
+246
+00:27:09.660 --> 00:27:15.540
+Pallavi Vanaja: Okay, okay. So yeah, I know for SMB, I have to contact either on a rock or current
+
+247
+00:27:15.840 --> 00:27:21.600
+Pallavi Vanaja: Because Arjun said I could get in touch with either of them. I think our guys in India, so
+
+248
+00:27:22.170 --> 00:27:32.880
+Kunal Ahuja: Get that with current because even a new dog started barking recently, and I'm sure he's aware of you. Good for you. And I'm walking in SMB right now I can walk you through the flow. Whatever I understand you have
+
+249
+00:27:32.970 --> 00:27:37.860
+Kunal Ahuja: A pretty good understanding but from Ed W perspective, I might not have, I mean idols all documents.
+
+250
+00:27:37.890 --> 00:27:38.790
+For yeah
+
+251
+00:27:42.390 --> 00:27:54.600
+Pallavi Vanaja: Yes. So we had someone we have moments shortcut. So he was the one who gave us access and he interacted with the Hadoop team and everyone to give us access
+
+252
+00:27:55.620 --> 00:27:58.020
+Pallavi Vanaja: So let us. I think we should reach out to
+
+253
+00:27:59.100 --> 00:28:11.640
+Pallavi Vanaja: Reach out to him and ask, he might have better information about the tables and he also did mention that there are a couple of interns in the team who are also who also asked for similar information because I guess they are also working on similar
+
+254
+00:28:13.050 --> 00:28:26.760
+Pallavi Vanaja: Use case of fraud detection or this billing issue related. So, so he seems to know information on the stable. So yeah, but he's very difficult to get hold of and he's also in India, so
+
+255
+00:28:29.670 --> 00:28:31.650
+Pallavi Vanaja: We, I will. I'll figure that out but
+
+256
+00:28:32.700 --> 00:28:37.230
+Kunal Ahuja: There's that probably we are going to use it over. It's reporters talking Dead with some
+
+257
+00:28:37.560 --> 00:28:47.850
+Kunal Ahuja: Get this is the data or this is a table where we were in. We get give them information from see so you have said all product family and they fill up those three columns. Is it wanted to commit and billing quantity
+
+258
+00:28:48.900 --> 00:28:49.920
+Pallavi Vanaja: OK. OK.
+
+259
+00:28:50.550 --> 00:28:51.090
+So this is
+
+260
+00:28:53.640 --> 00:29:00.120
+Kunal Ahuja: Me give them this information right away. And if you see SAP specific you will have these kind of table right
+
+261
+00:29:01.170 --> 00:29:02.040
+Kunal Ahuja: You see this bit
+
+262
+00:29:02.370 --> 00:29:15.990
+Kunal Ahuja: My deathbed. These are all SAP instances is the VM to do is get in the states are created right but they keep on moving so now they're in a button. Another feature in SAP, which by default settings where we didn't
+
+263
+00:29:17.070 --> 00:29:20.820
+Kunal Ahuja: Stay around that and you can read it on there.
+
+264
+00:29:21.540 --> 00:29:24.270
+Kunal Ahuja: Okay, lovely subscription might also be giving the data.
+
+265
+00:29:25.380 --> 00:29:25.740
+Pallavi Vanaja: Okay.
+
+266
+00:29:27.270 --> 00:29:28.590
+Pallavi Vanaja: Um, okay.
+
+267
+00:29:29.910 --> 00:29:36.360
+Pallavi Vanaja: And so, and Ed W does have infamy STDs information from EMC also right so that
+
+268
+00:29:36.450 --> 00:29:36.840
+Also
+
+269
+00:29:39.810 --> 00:29:41.640
+Kunal Ahuja: Might not be the case. Okay, so
+
+270
+00:29:42.240 --> 00:29:57.210
+Kunal Ahuja: That information. The only place you're going to get in there are all users order to those users files because they do send some as DDC ideas there. But there's no concrete information. Second, we don't even care about whether they're sending because it's not a mandate to do it constructs.
+
+271
+00:29:57.630 --> 00:29:58.620
+Pallavi Vanaja: Okay, okay.
+
+272
+00:29:59.100 --> 00:30:11.520
+Kunal Ahuja: But it might be associating with the fed him I'd be associating with that said, just to buy the user report us to know what I use this to for the future.
+
+273
+00:30:12.240 --> 00:30:25.830
+Kunal Ahuja: Future papas and they want to Perry and on Analytics. So they have some fields like in the user returns results I do something that everything is. Do you see it only. So if you do analytics will have to go to that might as usage data and my personal data collection.
+
+274
+00:30:26.250 --> 00:30:26.610
+Okay.
+
+275
+00:30:29.640 --> 00:30:30.270
+Kunal Ahuja: Sure.
+
+276
+00:30:35.910 --> 00:30:36.660
+Let's take one.
+
+277
+00:30:46.980 --> 00:31:02.820
+Kunal Ahuja: Yeah, I think this result. And what is the result ID as EDC it, but I can if you want, I can confirm with someone from. But the point is, is not a mandatory fields. So even if they don't send this we are not doing anything. It's just okay one 200 so we will not put it
+
+278
+00:31:03.060 --> 00:31:05.310
+Pallavi Vanaja: Got it. So it's better. We don't rely on it.
+
+279
+00:31:06.720 --> 00:31:11.490
+Pallavi Vanaja: Better. We look for other ways. If we want to get us to the same. Okay.
+
+280
+00:31:14.340 --> 00:31:25.860
+Kunal Ahuja: Yeah, but I mean. Next you want to look at the US and is for everybody. See, this will be the only way because they are stamping for some. For that reason, we can get a confirmation. So
+
+281
+00:31:26.010 --> 00:31:31.410
+Kunal Ahuja: Basically this ID, you can get more information about activity. Yeah. Okay, anything else.
+
+282
+00:31:32.820 --> 00:31:51.000
+Pallavi Vanaja: So one question relating to the SAP data that you showed, so you said the usage records have a one to one mapping with the consumption items and the billable items are are like have like multiple association with the sets, right. So,
+
+283
+00:31:52.050 --> 00:31:54.180
+Kunal Ahuja: Yeah, be one or more than one for
+
+284
+00:31:55.200 --> 00:31:56.430
+Kunal Ahuja: wandered into single bit
+
+285
+00:31:57.480 --> 00:32:07.470
+Pallavi Vanaja: Okay, so, so I'm just trying to understand. So, so this consumption item at one point is translated to billable item. Is that how it works.
+
+286
+00:32:09.630 --> 00:32:19.290
+Kunal Ahuja: I mean, it's not. If it's not likely that translated that minutes. Remove admittance, given its bond routing do the calculations that bit performs that reading your problems.
+
+287
+00:32:19.380 --> 00:32:26.220
+Pallavi Vanaja: Okay. Okay, so that's the holly job that looks up the side and all information to generate the billable item.
+
+288
+00:32:27.000 --> 00:32:27.570
+Kunal Ahuja: The trick.
+
+289
+00:32:28.080 --> 00:32:30.030
+Pallavi Vanaja: Okay, okay, and
+
+290
+00:32:31.440 --> 00:32:42.000
+Pallavi Vanaja: And the only way I can tie up the infamous so I wouldn't know which you say records were used for generating the billable item or would I know
+
+291
+00:32:43.140 --> 00:32:48.510
+Kunal Ahuja: You would know that, right, because see, if I give you a simple example.
+
+292
+00:32:50.640 --> 00:32:52.230
+Kunal Ahuja: This was the big created right
+
+293
+00:32:53.460 --> 00:33:00.990
+Kunal Ahuja: The big 123 and whatever the details. It has some ID tag to it right at a solid foundation ID or something, right.
+
+294
+00:33:01.980 --> 00:33:02.820
+Pallavi Vanaja: Okay. Oh.
+
+295
+00:33:03.570 --> 00:33:05.250
+Kunal Ahuja: And then you have said here, right.
+
+296
+00:33:05.490 --> 00:33:06.570
+Kunal Ahuja: Like to sit on.
+
+297
+00:33:08.730 --> 00:33:15.600
+Kunal Ahuja: Right. So once the rating drivers performed this will this soul Sonic and it will be tied to this sentence. Oh.
+
+298
+00:33:16.770 --> 00:33:17.760
+Pallavi Vanaja: OK. OK.
+
+299
+00:33:18.630 --> 00:33:22.980
+Kunal Ahuja: Or something like this. So once you click on this, take you back to this.
+
+300
+00:33:24.660 --> 00:33:25.350
+Kunal Ahuja: In this
+
+301
+00:33:25.770 --> 00:33:29.100
+Kunal Ahuja: Get this from SAP tables, because they do internally.
+
+302
+00:33:31.110 --> 00:33:35.460
+Pallavi Vanaja: Okay, okay. Yeah. Yeah. So, so SAP does this
+
+303
+00:33:37.110 --> 00:33:38.970
+Pallavi Vanaja: Edition of records so
+
+304
+00:33:40.530 --> 00:33:40.920
+Pallavi Vanaja: Okay.
+
+305
+00:33:41.850 --> 00:33:47.100
+Kunal Ahuja: So that means these two sets contributed to this bill billing valuable calculation.
+
+306
+00:33:47.730 --> 00:33:48.990
+Pallavi Vanaja: OK. OK.
+
+307
+00:33:49.380 --> 00:33:56.280
+Kunal Ahuja: You are very. I mean, you can get the data that logic is. I mean, it's a complex or it, but it's not something that you cannot do. I mean, we had tested it fully.
+
+308
+00:33:57.270 --> 00:33:58.740
+Kunal Ahuja: Implement, I mean the because we
+
+309
+00:33:59.400 --> 00:34:01.110
+Kunal Ahuja: Do have limited time
+
+310
+00:34:02.550 --> 00:34:02.910
+Pallavi Vanaja: Okay.
+
+311
+00:34:03.930 --> 00:34:04.170
+Kunal Ahuja: Well,
+
+312
+00:34:04.560 --> 00:34:06.270
+Kunal Ahuja: I will tell you that story.
+
+313
+00:34:06.870 --> 00:34:07.500
+Kunal Ahuja: We have to
+
+314
+00:34:08.160 --> 00:34:13.230
+Kunal Ahuja: Go through it slowly understand it and digested. How sad is playing with data. If you want to cover this useless.
+
+315
+00:34:14.280 --> 00:34:25.050
+Pallavi Vanaja: Yeah, because from what you said. It feels like this information could be what could possibly be a useful information to show some trends on because
+
+316
+00:34:25.860 --> 00:34:29.010
+Pallavi Vanaja: You just mentioned, like this is very difficult to comprehend.
+
+317
+00:34:29.910 --> 00:34:31.620
+Pallavi Vanaja: Even manually and
+
+318
+00:34:32.520 --> 00:34:33.000
+Pallavi Vanaja: If there's a
+
+319
+00:34:33.180 --> 00:34:33.780
+Pallavi Vanaja: Way we can
+
+320
+00:34:34.260 --> 00:34:41.130
+Kunal Ahuja: Yeah, it's like, see you want if you go man will you're playing with a single you that about animals. Right. A lot of time.
+
+321
+00:34:42.420 --> 00:34:42.690
+Yeah.
+
+322
+00:34:43.740 --> 00:34:53.940
+Pallavi Vanaja: Yeah, if this is something that can actually be shown as trained or something that can be just summed up and shown in a better way than that will be useful for
+
+323
+00:34:54.990 --> 00:34:57.060
+Pallavi Vanaja: Analysis the thumb.
+
+324
+00:34:58.140 --> 00:35:04.020
+Kunal Ahuja: So, I mean, if you're walking on business cards, a walk on them or use different from build up to you.
+
+325
+00:35:05.550 --> 00:35:10.500
+Kunal Ahuja: To be the high level use comes in, you're going to have some task oriented and then reviewed, one by one.
+
+326
+00:35:11.970 --> 00:35:12.300
+Pallavi Vanaja: Okay.
+
+327
+00:35:13.050 --> 00:35:13.320
+Kunal Ahuja: So,
+
+328
+00:35:13.590 --> 00:35:23.580
+Pallavi Vanaja: Your vendors build out get generator. So I know I remember this flow where after the overage is calculated. There are some discounts or something that are applied.
+
+329
+00:35:24.000 --> 00:35:26.370
+Pallavi Vanaja: And then later builder question dated
+
+330
+00:35:26.370 --> 00:35:37.230
+Pallavi Vanaja: But like from the data perspective. So the billable items are created by SAP and the tables are updated and all that. So what happens after that, like, Where can I get
+
+331
+00:35:37.830 --> 00:35:41.250
+Kunal Ahuja: A word will lead to know customers and he was really uh
+
+332
+00:35:42.150 --> 00:35:42.450
+Pallavi Vanaja: Huh.
+
+333
+00:35:42.690 --> 00:35:45.570
+Kunal Ahuja: But they will generate an invoice for that are built out for that. Right.
+
+334
+00:35:47.220 --> 00:35:55.170
+Kunal Ahuja: And running a beta i don't know before or after. They'll have work if a customer is eligible for some promos or discounts, they'll apply that in the final doc will be there.
+
+335
+00:35:56.250 --> 00:35:56.490
+Pallavi Vanaja: Is
+
+336
+00:35:56.550 --> 00:36:01.320
+Kunal Ahuja: A dog means it's this is not the invoice Edison do custom. This is a baby dog in sap.
+
+337
+00:36:02.310 --> 00:36:05.700
+Pallavi Vanaja: OK, OK. And if Bill dog is interface to finance.
+
+338
+00:36:07.710 --> 00:36:11.730
+Kunal Ahuja: Their finance also validate few things. And then finally invoices into customer
+
+339
+00:36:13.140 --> 00:36:13.500
+Pallavi Vanaja: Okay.
+
+340
+00:36:14.010 --> 00:36:28.020
+Kunal Ahuja: Okay, well you you were. I mean, if you do from Bill, you can have ignored finance for now. But if you do from build it build up to this so baby dog and also part of sap only that is done at every customers abt abt plus one or do something like that.
+
+341
+00:36:28.500 --> 00:36:37.920
+Kunal Ahuja: Okay, great. So yeah, that is one and that Bulldog also will be in some tables in a DW because full SAP is replicated to
+
+342
+00:36:38.970 --> 00:36:39.390
+Pallavi Vanaja: OK.
+
+343
+00:36:40.440 --> 00:36:47.820
+Pallavi Vanaja: OK, so for so so for this particular flow, I would have to look into the sap tables in specific
+
+344
+00:36:48.480 --> 00:36:49.350
+Pallavi Vanaja: Yeah, so
+
+345
+00:36:49.380 --> 00:36:51.870
+Pallavi Vanaja: I would have to get some point of contact for that.
+
+346
+00:36:51.930 --> 00:36:58.290
+Kunal Ahuja: Yeah, I think that this one I for SAP, I can give you the point of contact from India or Newton. These guys are very good in that
+
+347
+00:36:58.380 --> 00:37:02.400
+Kunal Ahuja: This how does actually all SAP plays this play that with this table.
+
+348
+00:37:02.820 --> 00:37:03.300
+Pallavi Vanaja: Well, okay.
+
+349
+00:37:03.720 --> 00:37:05.820
+Kunal Ahuja: Yeah, they will be able to walk you through
+
+350
+00:37:06.120 --> 00:37:11.460
+Pallavi Vanaja: Yeah, that would be great because the person I'm working with. She is in India, so she can reach out to them.
+
+351
+00:37:11.850 --> 00:37:13.110
+Pallavi Vanaja: In Our Time zone to
+
+352
+00:37:13.350 --> 00:37:14.490
+Pallavi Vanaja: Get some information.
+
+353
+00:37:15.060 --> 00:37:20.370
+Kunal Ahuja: Sure. So, okay, well let me share this story. I'm talking about that. Will you get what I'm saying.
+
+354
+00:37:20.730 --> 00:37:25.410
+Kunal Ahuja: Okay, because they build up the user record is multi step right build up to it.
+
+355
+00:37:26.220 --> 00:37:33.900
+Kunal Ahuja: Yep, right, and then back to set right and then if you lose it to all users find whatever that right something like
+
+356
+00:37:36.210 --> 00:37:39.570
+Kunal Ahuja: The one that I'll give you will be from your big to set. Okay.
+
+357
+00:37:39.990 --> 00:37:40.680
+Pallavi Vanaja: Yes, yeah.
+
+358
+00:37:41.100 --> 00:37:51.660
+Kunal Ahuja: And this is this is this is also a little complex. So if you understand this, you will know how SAP is playing and you will be able to relate things maybe from Bulldog. It doesn't play with that data with that.
+
+359
+00:37:52.200 --> 00:37:57.150
+Kunal Ahuja: There isn't big to certificate call it reverses it again right because it relates at the month end again.
+
+360
+00:37:57.510 --> 00:37:58.170
+Pallavi Vanaja: Yes, yes.
+
+361
+00:37:58.800 --> 00:37:59.880
+Kunal Ahuja: It does become complex
+
+362
+00:38:00.420 --> 00:38:00.720
+Okay.
+
+363
+00:38:03.450 --> 00:38:04.890
+Kunal Ahuja: With that call that complex
+
+364
+00:38:07.830 --> 00:38:08.190
+Pallavi Vanaja: Yeah.
+
+365
+00:38:09.510 --> 00:38:11.610
+Pallavi Vanaja: Yeah, I think those were my questions.
+
+366
+00:38:13.020 --> 00:38:23.820
+Pallavi Vanaja: Yeah, thank you so much canal for explaining everything in detail. It's too complex to even just understand just by reading the confluence page or anything. But yeah, thanks for your time.
+
+367
+00:38:24.510 --> 00:38:24.960
+Kunal Ahuja: No worries.
+
+368
+00:38:26.070 --> 00:38:29.400
+Kunal Ahuja: Let me give you the JIRA find out. And then if you have questions, we can sync up
+
+369
+00:38:30.000 --> 00:38:31.500
+Pallavi Vanaja: Yes, sure. Yeah, definitely. Yeah.
+
+370
+00:38:34.290 --> 00:38:37.440
+Pallavi Vanaja: Thanks. Thank you. Have a nice day. Bye.
+
