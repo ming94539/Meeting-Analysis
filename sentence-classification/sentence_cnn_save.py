@@ -173,6 +173,7 @@ if get_transcript:
     x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
     print('Transcript Inference')
     predictions = model.predict(x_test, batch_size=batch_size, verbose=1)
+    print('raw predictions:',predictions.shape)
     test = []
     for i in range(0, len(predictions)):
         test.append(predictions[i].argmax(axis=0))
@@ -195,6 +196,8 @@ if get_transcript:
             print(i,test_comments[i-1])
             print(i,label,test[i],test_comments[i])
             print(i,test_comments[i+1])
+            for pr in predictions[i]:
+                print(float(pr)*100,'%')
             print('-----------')
     output =  open('senClass_predictions.txt','w+')
     print('Start overwriting previous predictions in .txt file')
