@@ -196,7 +196,7 @@ if get_transcript:
             print(i,label,test[i],test_comments[i])
             print(i,test_comments[i+1])
             print('-----------')
-    output =  open('sentence-classification/senClass_predictions.txt','w+')
+    output =  open('senClass_predictions.txt','w+')
     print('Start overwriting previous predictions in .txt file')
     for p in test:
         output.write('%s\n' % p)

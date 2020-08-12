@@ -22,9 +22,9 @@ if len(sentences) == 1:
     segmenter=DeepSegment('en')
     sentences = segmenter.segment_long(sentences[0])
 #Get Vocab Dictionary for tokenization in next step
-with open('email_intent_classification/vocab.csv',mode = 'r') as infile:
+with open('vocab.csv',mode = 'r') as infile:
     reader = csv.reader(infile)
-    with open('email_intent_classification/vocab_new.csv',mode='w') as outfile:
+    with open('vocab_new.csv',mode='w') as outfile:
         writer = csv.writer(outfile)
         word2idx = {rows[0]:rows[1] for rows in reader}
 #print(word2idx)
@@ -50,7 +50,7 @@ for sentence in sentences:
 
 inference_input  = sequence.pad_sequences(total_tokenized, maxlen=100)
 
-model = load_model('email_intent_classification/best_cnn_weights.hdf5')
+model = load_model('best_cnn_weights.hdf5')
 model.summary()
 predicted = model.predict_classes(inference_input)
 print('Number of sentences input into the model', len(sentences))
@@ -60,7 +60,7 @@ for i in range(len(predicted)):
         print('PREV SENT:',sentences[i-1])
         print('ACTION:',i,sentences[i])
         print('---------')
-output = open("email_intent_classification/boxer_predictions.txt","w+")
+output = open("boxer_predictions.txt","w+")
 for p in predicted:
     output.write('%s\n' % p[0])
 output.close()
