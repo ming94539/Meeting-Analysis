@@ -1,65 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Meeting Transcript Analysis</title>
-  
-  
-  
-      <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meeting Transcript Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
- 
-		<h1>Analyze your Meeting with <span>Natural Language Processing</span></h1>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="/">Meeting Analysis: Action Item Extraction</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-		<div id="debug" style="margin:65px; margin-top:100px;">
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
 
-			
-			<!-- <input type="color" id="colors">
-			 <input type="number" id="lineWidth" style="width:60px" value="0.2" step="0.1" min="0.1"> -->
-			<input type="button" id="clearButton" value="Clear" style="">
-			<br/>
-			<span style="color: #4DAF7C; font-weight: 400; font-family: 'Open Sans', Helvetica;	">Draw the Digit inside this Box!</span>
-		</div>
 
-		<div style="margin-left:175px; margin-top:460px; float:left; position:absolute;">
-			
-			<a href="#" class="myButton"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;	"> Predict </span></a>			
-		</div>
-		<div >
-			<h1 id="result" style="margin-right:20px; margin-top:300px;float:left;"><span> </span></h1>
-		</div>
+    </ul>
+  </div>
+</nav>
+<br/>
+<br/>
+<br/>
+{% block javascript %}
+  <script>
+	  tm1 = JSON.parse({{dataPie | tojson}})
+	  console.log(tm1);
+	  window.onload = function() {
+	
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		title: {
+			text: "Participants Engagement Duration"
+		},
+		data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{'label'} {y}",
+		dataPoints: tm1
+		}]
+	});
+	chart.render();
 
-		
-  		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	}
+</script> 
+{% endblock %}
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+    <div class="container">
+        
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                    <label>Your Meeting Transcript</label>
+            <textarea type="text" rows="5" cols="5" class="form-control"  name="transcript" required="true">   </textarea>
+            <br/>
+            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+         
+        </div>
+        </form>
+    </div>
+     
 
-	    	<div class="ml-container">
-			<form action ="{{url_for('predict')}}" method="POST">
-			<p> Copy and Paste your Transcript Here </p>
-			<textarea name ="transcript" rows="10" cols="80"></textarea>
-			<br/>
-			<input type="submit" class="btn-info" value="submit">
-			</form>
-		</div>
-		<script src="{{ url_for('static',filename='index.js') }}"></script>
-	    <script type="text/javascript">
-	   
-	   		$(".myButton").click(function(){
-	   			var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-	   			var canvasObj = document.getElementById("canvas");
-	   			var img = canvasObj.toDataURL();
-	   			$.ajax({
-	   				type: "POST",
-	   				url: $SCRIPT_ROOT + "/predict/",
-	   				data: img,
-	   				success: function(data){
-	   					$('#result').text(' Predicted Output: '+data);
-	   				}
-	   			});
-	   		});
-	   
-	   </script>
+
+    <div class="container">
+    	<div class="alert alert-success" role="alert">
+        <p class="alert-heading">Result</p>
+        <p>Number of Action Items:{{num_of_results}}</p>
+        <ol>{% for i in results %}
+        	<li>
+			<i>{{i[0][0]}}</i>
+			<br>
+			<b>{{i[0][1]}} {{i[1]}}</b>
+			<br>
+			<i>{{i[0][2]}}</i>
+			<br>
+		</li>
+		</br>
+        	{%endfor %}
+    	</ol>
+    	</div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
