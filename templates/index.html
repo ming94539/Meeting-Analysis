@@ -32,7 +32,6 @@
 {% block javascript %}
   <script>
 	  tm1 = JSON.parse({{dataPie | tojson}})
-	  console.log(tm1);
 	  window.onload = function() {
 	
 	var chart = new CanvasJS.Chart("chartContainer", {

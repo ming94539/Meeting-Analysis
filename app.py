@@ -5,6 +5,7 @@ import sys
 import os
 from datetime import datetime
 from flask_model import inferencing
+from process_transcripts import get_speakers,get_durations
 app = Flask(__name__)
 
 #global model, graph
@@ -12,21 +13,31 @@ app = Flask(__name__)
 
 @app.route('/')#if they are at the main page
 def index():
-    dataPoints=[{'y': 58, 'label': "Google"},
-			{'y': 32, 'label': "Bing"},
-			{'y': 3, 'label': "Baidu"},
-			{'y': 6, 'label': "Yahoo"},
-			{'y': 1, 'label': "Others"}
-                ]
+    dataPoints = [
+            {'y': 20, 'label': "Google"},
+	    {'y': 20, 'label': "Bing"},
+            {'y': 20, 'label': "Baidu"},
+            {'y': 20, 'label': "Yahoo"},
+            {'y': 20, 'label': "Others"}
+            ]
     dataPoints=json.dumps(dataPoints)
     return render_template('index.html',dataPie=dataPoints)
 
 @app.route('/predict',methods=['GET','POST'])
 def predict():
+    dataVal = []
     transcriptInput = request.form['transcript']
-    if transcriptInput[:6] == "WEBVTT" and transcriptInput[9] == "1":
-        print("Raw Zoom Transcript!")
-        transcriptInput=transcriptInput.splitlines()
+    #if transcriptInput[:6] == "WEBVTT" and transcriptInput[9] == "1":
+    print("Raw Zoom Transcript!")
+    speakers = get_speakers(transcriptInput)
+    print(speakers)
+    speakerDurations, total_time = get_durations(transcriptInput,speakers)
+    for speaker in speakers:
+        dictionary = {}
+        dictionary['y']=(speakerDurations[speaker]/total_time)*100
+        dictionary['label']=speaker
+        dataVal.append(dictionary)
+    dataVal=json.dumps(dataVal)
     
         
     #Writing it into a file
@@ -39,7 +50,7 @@ def predict():
     #temp_transcript_file.close()
     results = inferencing(True,True,"models/cnn",transcriptInput)
     num_of_results = len(results)
-    return render_template("index.html",results=results,num_of_results=num_of_results)
+    return render_template("index.html",results=results,num_of_results=num_of_results,dataPie=dataVal)
     
 
 
