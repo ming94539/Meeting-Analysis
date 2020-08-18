@@ -869,7 +869,6 @@ def get_durations(transcript,speakers):
         speaker_output[s] = 0
     for i in range(len(lines)):
         line  = lines[i]
-        print(line)
         duration = 0
         #If it's a time stamp line
         if (not re.search('[a-zA-Z]',line)) and '-->' in line:
@@ -900,4 +899,18 @@ def get_speakers(transcript):
                 list_of_speakers.append(speaker)
     return list_of_speakers
 
+def clean_transcript(transcript):
+    lines = transcript.splitlines(True)
+    if lines[0] == "WEBVTT":
+        lines = lines[4:]
+    cleaned_transcript = ""
+    for line in lines:
+        if '-->' in line:
+            continue
+        if line[:-2].isnumeric():
+            continue
+        #if len(line) == 1 and line == "\n:
+         #   continue
+        cleaned_transcript+=line
+    return cleaned_transcript
 

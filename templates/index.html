@@ -29,33 +29,77 @@
 <br/>
 <br/>
 <br/>
+{% if lineData %}
+<body>
+	<div id="chartContainer" style="height: 370px"></div>
+</body>	
+{% endif %}
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% if displayPie %}
+	<body>
+		<div id="pieChartContainer" style="height: 370px"></div>	
+	</body>
+{% endif %}
+
+
 {% block javascript %}
+<script>
+
+line_data = JSON.parse({{lineData | tojson}});
+var lineChart = new CanvasJS.Chart("chartContainer", {
+	'title': {
+		text: "Positive Sentiment Throughout Meeting"
+	},
+	toolTip: {
+		'shared': true
+	},
+	legend: {
+		cursor: "pointer",
+		verticalAlign: "top",
+		horizontalAlign: "center",
+		dockInsidePlotArea: true,
+		itemclick: toogleDataSeries
+	},
+		'data': line_data
+});
+lineChart.render();
+
+function toogleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else{
+		e.dataSeries.visible = true;
+	}
+	lineChart.render();
+}
+
+</script>
+
   <script>
-	  tm1 = JSON.parse({{dataPie | tojson}})
+	  tm1 = JSON.parse({{dataPie | tojson}});
 	  window.onload = function() {
 	
-	var chart = new CanvasJS.Chart("chartContainer", {
+	var chart = new CanvasJS.Chart("pieChartContainer", {
 		animationEnabled: true,
 		title: {
 			text: "Participants Engagement Duration"
 		},
 		data: [{
 		type: "pie",
+		showInLegend: true,
 		startAngle: 240,
 		yValueFormatString: "##0.00\"%\"",
 		indexLabel: "{'label'} {y}",
 		dataPoints: tm1
 		}]
 	});
-	chart.render();
-
+	if({{displayPie}}){
+		chart.render();
+	}
 	}
 </script> 
 {% endblock %}
-<body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</body>
+
     <div class="container">
         
         <form method="POST" action="/predict">
