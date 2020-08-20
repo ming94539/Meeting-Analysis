@@ -872,7 +872,6 @@ def get_durations(transcript,speakers):
         duration = 0
         #If it's a time stamp line
         if (not re.search('[a-zA-Z]',line)) and '-->' in line:
-            print('in')
             s_hours = float(line[:2])*60*60
             s_minutes = float(line[3:5])*60
             s_seconds = float(line[6:8])
@@ -901,7 +900,7 @@ def get_speakers(transcript):
 
 def clean_transcript(transcript):
     lines = transcript.splitlines(True)
-    if lines[0] == "WEBVTT":
+    if "WEBVTT" in lines[0]:
         lines = lines[4:]
     cleaned_transcript = ""
     for line in lines:

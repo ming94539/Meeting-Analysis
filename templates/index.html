@@ -29,21 +29,91 @@
 <br/>
 <br/>
 <br/>
+
+</script>
+{% if displayCloud1 %}
+<img src={{displayCloud1}} alt="word cloud 1">
+<img src={{displayCloud2}} alt="word cloud 2">
+{% endif %}
+<br/>
+{% if displayPie %}
+<div id="pieChartContainer" style="height: 370px"></div>	
+{% endif %}
+
+{% if barData %}
+<div id="barChartContainer" style="height: 370px; width: 100%;"></div>
+{% endif %}
+
 {% if lineData %}
 <body>
 	<div id="chartContainer" style="height: 370px"></div>
 </body>	
 {% endif %}
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-{% if displayPie %}
-	<body>
-		<div id="pieChartContainer" style="height: 370px"></div>	
-	</body>
-{% endif %}
 
+
+    <div class="container">
+        
+        <form method="POST" action="/predict">
+            <div class="form-group">
+                    <label>Your Meeting Transcript</label>
+            <textarea type="text" rows="5" cols="5" class="form-control"  name="transcript" required="true">   </textarea>
+            <br/>
+            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
+            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+         
+        </div>
+        </form>
+    </div>
+     
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 {% block javascript %}
 <script>
+
+barData = JSON.parse({{barData | tojson}});
+var barChart = new CanvasJS.Chart("barChartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Speakers' Sentiment Profile"
+	},
+	axisY: {
+		title: "Percentage of Sentiment (%)",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC"
+	},
+	axisY2: {
+		title: "Percentage of Sentiment",
+		titleFontColor: "#C0504E",
+		lineColor: "#C0504E",
+		labelFontColor: "#C0504E",
+		tickColor: "#C0504E"
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick: toggleDataSeries
+	},
+	data: barData
+});
+barChart.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	barChart.render();
+}
+
+
+
 
 line_data = JSON.parse({{lineData | tojson}});
 var lineChart = new CanvasJS.Chart("chartContainer", {
@@ -73,13 +143,12 @@ function toogleDataSeries(e){
 	lineChart.render();
 }
 
-</script>
 
-  <script>
+
 	  tm1 = JSON.parse({{dataPie | tojson}});
 	  window.onload = function() {
 	
-	var chart = new CanvasJS.Chart("pieChartContainer", {
+	var pieChart = new CanvasJS.Chart("pieChartContainer", {
 		animationEnabled: true,
 		title: {
 			text: "Participants Engagement Duration"
@@ -89,32 +158,15 @@ function toogleDataSeries(e){
 		showInLegend: true,
 		startAngle: 240,
 		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{'label'} {y}",
+		indexLabel: "{speaker} {y}",
+		legendText: "{speaker}",
 		dataPoints: tm1
 		}]
 	});
-	if({{displayPie}}){
-		chart.render();
+		pieChart.render();
 	}
-	}
-</script> 
+</script>
 {% endblock %}
-
-    <div class="container">
-        
-        <form method="POST" action="/predict">
-            <div class="form-group">
-                    <label>Your Meeting Transcript</label>
-            <textarea type="text" rows="5" cols="5" class="form-control"  name="transcript" required="true">   </textarea>
-            <br/>
-            <button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
-            <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-         
-        </div>
-        </form>
-    </div>
-     
-
 
     <div class="container">
     	<div class="alert alert-success" role="alert">
@@ -124,7 +176,7 @@ function toogleDataSeries(e){
         	<li>
 			<i>{{i[0][0]}}</i>
 			<br>
-			<b>{{i[0][1]}} {{i[1]}}</b>
+			{{i[0][1]}}
 			<br>
 			<i>{{i[0][2]}}</i>
 			<br>
