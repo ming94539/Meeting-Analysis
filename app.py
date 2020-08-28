@@ -6,9 +6,10 @@ import os
 from datetime import datetime
 from flask_model import inferencing
 from sent_analysis import get_speaker_sentiments
-from process_transcripts import get_speakers,get_durations,clean_transcript
+from process_transcripts import get_speakers,get_durations,clean_transcript,remove_speakers,clean_transcript_numbers
 app = Flask(__name__)
-
+import spacy
+from email_inference import email_intent
 #global model, graph
 #model, graph = init()
 
@@ -29,6 +30,12 @@ def reformat_sentiment(profile):
         tempDict['name']=sent_types
         tempDict['showInLegend']=True
         tempDict['axisYType']="secondary"
+        if sent_types == "Positive":
+            tempDict['color'] = "#60F7AC"
+        elif sent_types == "Negative":
+            tempDict['color'] = "#CD0332"
+        elif sent_types == "Neutral":
+            tempDict['color'] = "#FDF6B7"
         tempDict['dataPoints']=[]
         for person_sent in profile: # iterates through each speaker's dictionary
             tempDict['dataPoints'].append({"label":person_sent,"y":(profile[person_sent][sent_types])*100})
@@ -71,7 +78,6 @@ def create_wordCloud(transcriptInput):
         if line and line != "\n":
             newlines.append(line+",\n")
     newlines.insert(0,"Text,\n")
-    print('IN WORDCLOUD',newlines)
     with open("transcript.csv","w") as new_csv:
         new_csv.writelines(newlines)
     from  wordCloud import run_this
@@ -99,15 +105,17 @@ def predict():
         if len(line) == 0:
             continue
         temp.append(line)
-    if "-->" in temp[2] and ":" in temp[3]:#if has speakers and time stamps in proper zoom template
+    if len(temp) > 3 and "-->" in temp[2] and ":" in temp[3]:#if has speakers and time stamps in proper zoom template
         print('transcript has speaker and timestamp')
         #Create Pie chart
         speakers = get_speakers(transcriptInput)
         dataVal,displayPie = engagement_pie(transcriptInput,speakers)
         #Clean transcript
-        transcriptInput = clean_transcript(transcriptInput) #clean strip the time stamps, WEBVTT, numbers  
+        cleantranscriptInput = clean_transcript_numbers(transcriptInput) #clean strip the time stamps, WEBVTT, numbers BUT ADD UNIQUE #s 
+        #Up to this point should be solid/no issues, checked it against one transcript
+        print(cleantranscriptInput)
         #Run thru Sentiment backend
-        speaker_sent, speaker_timeline_sent = get_speaker_sentiments(transcriptInput)
+        speaker_sent, speaker_timeline_sent = get_speaker_sentiments(cleantranscriptInput)
         #Create line chart
         lineData = get_line_sentiment(speaker_timeline_sent)
         #Create Bar chart
@@ -116,12 +124,26 @@ def predict():
     
     transcriptInput = clean_transcript(transcriptInput)    
     #Create Word Cloud
-    print('transcript cleaned',transcriptInput)
-    displayCloud1,displayCloud2=create_wordCloud(transcriptInput)
-    
+    without_speaker = remove_speakers(transcriptInput)
+    displayCloud1,displayCloud2=create_wordCloud(without_speaker)
+    #Name Entity Recognition
+    space = spacy.load("en_core_web_sm")
+    doc = space(without_speaker)
+    ppl_ner = set()
+    taboo = ["another","Transcript","another Transcript","Ed W","Bulldog","Bill","Item", "Bill Doc", "Ed w.","Bill dog","SAP Bob"]
+    for ent in doc.ents:
+        if ent.label_ == "PERSON":
+            if ent.text in taboo:
+                continue
+            if len(ent.text) > 2:
+                ppl_ner.add(ent.text)
+    people_ner=""
+    for p in ppl_ner:
+        people_ner+=p+", "
     results = inferencing(True,True,"models/cnn",transcriptInput)
     num_of_results = len(results)
-    return render_template("index.html",results=results,num_of_results=num_of_results,dataPie=dataVal,displayPie=displayPie,lineData=lineData,displayCloud1="static/"+displayCloud1,displayCloud2="static/"+displayCloud2,barData=barData)
+    #ensemble(transcriptInput)
+    return render_template("index.html",results=results,num_of_results=num_of_results,dataPie=dataVal,displayPie=displayPie,lineData=lineData,displayCloud1="static/"+displayCloud1,displayCloud2="static/"+displayCloud2,barData=barData,people_ner=people_ner)
 
 
 if __name__ == '__main__':

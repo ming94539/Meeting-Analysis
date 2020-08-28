@@ -897,7 +897,15 @@ def get_speakers(transcript):
             if speaker not in list_of_speakers:
                 list_of_speakers.append(speaker)
     return list_of_speakers
-
+def remove_speakers(transcript):
+    lines=transcript.splitlines(True)
+    output = ""
+    for line in lines:
+        if ":" in line and not "-->" in line:
+            split_l=line.split(':')
+            output+=split_l[1]
+    return output
+            
 def clean_transcript(transcript):
     lines = transcript.splitlines(True)
     if "WEBVTT" in lines[0]:
@@ -906,10 +914,30 @@ def clean_transcript(transcript):
     for line in lines:
         if '-->' in line:
             continue
-        if line[:-2].isnumeric():
+        if line[0].isnumeric():
             continue
-        #if len(line) == 1 and line == "\n:
-         #   continue
         cleaned_transcript+=line
     return cleaned_transcript
+
+
+def clean_transcript_numbers(transcript):
+    lines = transcript.splitlines(True)
+    if "WEBVTT" in lines[0]:
+        lines = lines[4:]
+    cleaned_transcript = ""
+    counter = 0
+    for line in lines:
+        if '-->' in line:
+            continue
+        if line[0].isnumeric():
+            continue
+        if line == False:#if it's just \n
+            continue
+        if len(line) <3: #if it's '\n'
+            continue
+        cleaned_transcript+="["+str(counter)+"|"+line
+        counter+=1
+    return cleaned_transcript
+
+
 

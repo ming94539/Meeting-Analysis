@@ -18,8 +18,10 @@ from keras.layers import Conv1D, GlobalMaxPooling1D
 from keras.preprocessing.text import Tokenizer
 from nltk import word_tokenize
 
+from email_inference import email_intent
+
 import spacy
-spacy_nlp = spacy.load("en")
+spacy_nlp = spacy.load("en_core_web_sm")
 
 def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
 #python3 sentence_cnn_save.py models/cnn path_to_transcript
@@ -68,13 +70,14 @@ def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
         test = []
         for i in range(0, len(predictions)):
             test.append(predictions[i].argmax(axis=0))
-        print('inference:', test)
         print('number of output sentences',len(test))
         
         #Getting what we want
         sorted_commands = []
+        email_input = []
         for i in range(len(test)):
             label = ""
+            spec = 0
             if test[i] == 1:
                 label="QUESTION"
                 #print(i,label,test[i],test_comments[i])
@@ -95,11 +98,26 @@ def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
                 total_action_item.append(test_comments[i])
                 total_action_item.append(back_context)
                 #total_action_item+="\n"+str(float(predictions[i][3])*100)+"%"
-                
-                sorted_commands.append((total_action_item,float('%.3f'%(float(predictions[i][3])*100))))
+                email_input.append(test_comments[i])
+                #Check if there's date NER in sentence
+                doc = spacy_nlp(test_comments[i])
+                for ent in doc.ents:
+                    if ent.label_ == "DATE" or ent.label_ == "TIME":
+                        spec = 2
+                        break
+                sorted_commands.append([total_action_item,float('%.3f'%(float(predictions[i][3])*100)),spec])
         
+        email_predicted = email_intent(email_input)
+        print('number of email predictions:', len(email_predicted))
+        print('number of sentence classification predictions:',len(sorted_commands))
+        for i in range(len(email_predicted)):
+            if email_predicted[i][0] == 1:
+                sorted_commands[i][2] = 1
         sorted_commands = sorted(sorted_commands,key=lambda x:(-x[1],x[0]))
-        return [(tup[0],"("+str(tup[1])+'%)') for tup in sorted_commands]
+        if len(sorted_commands) > 9:
+            sorted_commands = sorted_commands[:6]
+        print('sorted_commands :',sorted_commands)
+        return [[tup[0],"("+str(tup[1])+'%)',tup[2]] for tup in sorted_commands]
 if __name__ == "__main__":
     
     inferencing(get_transcript,load_model_flag,model_name,dialogue_str)

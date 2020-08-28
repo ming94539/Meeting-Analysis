@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+<style>
+.main{
+	text-align:center;
+	margin:auto;
+	max-width:90%;
+}
+.ner {
+	text-align:center;
+	max-width:90%;
+}
+.cloud_pie{
+	display:flex;
+}
+.pieces{
+	flex: 33.3%;
+	padding: 5px;
+}
+img{
+	width:300px;
+	height: 100%;
+}
+</style>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Meeting Transcript Analysis</title>
@@ -31,25 +54,6 @@
 <br/>
 
 </script>
-{% if displayCloud1 %}
-<img src={{displayCloud1}} alt="word cloud 1">
-<img src={{displayCloud2}} alt="word cloud 2">
-{% endif %}
-<br/>
-{% if displayPie %}
-<div id="pieChartContainer" style="height: 370px"></div>	
-{% endif %}
-
-{% if barData %}
-<div id="barChartContainer" style="height: 370px; width: 100%;"></div>
-{% endif %}
-
-{% if lineData %}
-<body>
-	<div id="chartContainer" style="height: 370px"></div>
-</body>	
-{% endif %}
-
 
     <div class="container">
         
@@ -64,6 +68,81 @@
         </div>
         </form>
     </div>
+
+<div class="ner">
+	<p>People that are mentioned during the meeting: {{people_ner}} </p>
+</div>
+<div class="cloud_pie">
+	{% if displayCloud1 %}
+	<div class="pieces">
+		<img src={{displayCloud1}} alt="word cloud 1" style="width:100%" style="height:100%">
+	</div>
+	<div class="pieces">
+		<img src={{displayCloud2}} alt="word cloud 2" style="width:100%" style="height:100%">
+	</div>
+	{% endif %}
+	<br/>
+	{% if displayPie %}
+	<div class="pieces">
+		<div id="pieChartContainer" style="height: 370px"></div>
+	</div>
+	{% endif %}
+</div>
+<div class="main">
+	    <div class="container">
+		<div class="alert alert-success" role="alert">
+		<p class="alert-heading">Result</p>
+		<p>Number of Action Items:{{num_of_results}}</p>
+		<ol>{% for i in results %}
+			{% if i[2] == 0 %}
+			<li>
+				<i>{{i[0][0]}}</i>
+				<br>
+				{{i[0][1]}}
+				<br>
+				<i>{{i[0][2]}}</i>
+				<br>
+			</li>
+			</br>
+			{% elif i[2] == 1 %}	
+			<li>
+				<i>{{i[0][0]}}</i>
+				<br>
+				<b>{{i[0][1]}}</b>
+				<br>
+				<i>{{i[0][2]}}</i>
+				<br>
+				
+			</li>
+			</br>
+			{% else %}	
+			<li>
+				<i>{{i[0][0]}}</i>
+				<br>
+				<b>{{i[0][1]}}</b>
+				<br>
+				<i>{{i[0][2]}}</i>
+				<br>
+			</li>
+			</br>
+			{% endif %}
+		{%endfor %}
+		</ol>
+		</div>
+	    </div>
+
+
+	{% if barData %}
+	<div id="barChartContainer" style="height: 370px; width: 100%;"></div>
+	{% endif %}
+
+	{% if lineData %}
+	<body>
+		<div id="chartContainer" style="height: 370px"></div>
+	</body>	
+	{% endif %}
+</div>
+
      
 
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -118,7 +197,13 @@ function toggleDataSeries(e) {
 line_data = JSON.parse({{lineData | tojson}});
 var lineChart = new CanvasJS.Chart("chartContainer", {
 	'title': {
-		text: "Positive Sentiment Throughout Meeting"
+		text: "Avg Sentiment Throughout Meeting"
+	},
+	axisX: {
+		title: "Percentage of Progress through the Meeting"
+	},
+	axisY: {
+		title: "Amount of Positive Sentiment"
 	},
 	toolTip: {
 		'shared': true
@@ -168,24 +253,7 @@ function toogleDataSeries(e){
 </script>
 {% endblock %}
 
-    <div class="container">
-    	<div class="alert alert-success" role="alert">
-        <p class="alert-heading">Result</p>
-        <p>Number of Action Items:{{num_of_results}}</p>
-        <ol>{% for i in results %}
-        	<li>
-			<i>{{i[0][0]}}</i>
-			<br>
-			{{i[0][1]}}
-			<br>
-			<i>{{i[0][2]}}</i>
-			<br>
-		</li>
-		</br>
-        	{%endfor %}
-    	</ol>
-    	</div>
-    </div>
+
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

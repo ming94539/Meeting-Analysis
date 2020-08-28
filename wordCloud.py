@@ -324,13 +324,14 @@ stop_words.append('know')
 stop_words.append('common')
 stop_words.append('so')
 stop_words.append('one')
-stop_words.append(['come','go','need','going','good','change','So', 'I','And', 'like', 'Okay,', 'Okay.', 'get', 'Yeah,', 'Right.', 'see', 'We', 'This', 'also', 'us', 'Yeah.', 'The', 'basically', 'go', "I'm", 'You', 'right.', 'it.', 'So,', 'need', 'But', 'give', 'said', 'want', 'going', 'use', 'Yes.', 'something', "that's", 'user', 'might', 'It', 'What', "It's", 'kind', 'right,', 'come', 'think', 'table', 'that.', 'created', 'If', 'subscription', 'record', 'every', 'That', 'OK.', 'good', 'mean,','able', 'would', 'Now', 'say', "I'll", 'put', 'specific', 'build', 'Yes,'])
+stop_words.append(["someone","kind","thing","stuff",'come','go','need','going','good','change','So', 'I','And', 'like', 'Okay,', 'Okay.', 'get', 'Yeah,', 'Right.', 'see', 'We', 'This', 'also', 'us', 'Yeah.', 'The', 'basically', 'go', "I'm", 'You', 'right.', 'it.', 'So,', 'need', 'But', 'give', 'said', 'want', 'going', 'use', 'Yes.', 'something', "that's", 'user', 'might', 'It', 'What', "It's", 'kind', 'right,', 'come', 'think', 'table', 'that.', 'created', 'If', 'subscription', 'record', 'every', 'That', 'OK.', 'good', 'mean,','able', 'would', 'Now', 'say', "I'll", 'put', 'specific', 'build', 'Yes,'])
 
 def f_stopw(w_list):
     """
     filtering out stop words
     """
-    return [word for word in w_list if word not in stop_words]
+    output = [word for word in w_list if word not in stop_words] 
+    return output 
 
 
 def preprocess_sent(rw):
@@ -360,7 +361,7 @@ def preprocess_word(s):
     ## HERE ##
     #w_list = f_typo(w_list)
     #_list = f_spell(w_list)
-    w_list = f_stem(w_list)
+   # w_list = f_stem(w_list)
     w_list = f_stopw(w_list)
 
     return w_list

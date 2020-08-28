@@ -193,7 +193,6 @@ def encode_transcript(test_comments,data_split=1.0, embedding_name=None, add_pos
     
     
     x_test  = np.array(encoded_comments[training_sample:])
-    print(len(x_test), 'test sequences')
 
     return x_test 
 
