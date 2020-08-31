@@ -4,8 +4,7 @@
 This project provides a PoC of extracting meaningful information from Meeting transcripts to assist collaborators/participants to:
 1. write Meeting Minutes
 2. find specific details or highlights
-... 
-<br/>
+... <br/>
 by providing the following:<br/>
 1. a bird's-eye view of what was discussed
 2. highlights/actionable items of the meeting
