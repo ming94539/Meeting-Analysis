@@ -4,11 +4,12 @@
 This project provides a PoC of extracting meaningful information from Meeting transcripts to assist collaborators/participants to:
 1. write Meeting Minutes
 2. find specific details or highlights
-...\n
-by providing the following: \n
-1. giving a bird's-eye view of what was discussed
-2. show highlights/actionable items of a meeting
-3. structure of a meeting
+... 
+<br/>
+by providing the following:<br/>
+1. a bird's-eye view of what was discussed
+2. highlights/actionable items of the meeting
+3. structure of the meeting
 
 ## Features
 1. Actionable Item Extraction (Two pass - Ensemble approach)
