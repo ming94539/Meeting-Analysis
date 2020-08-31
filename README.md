@@ -16,4 +16,14 @@ by providing the following:<br/>
 3. NER 
 4. Participant's Engagement Breakdown
 
+## Setup
 
+### Install dependencies
+
+Clone library on github and install requirements.
+
+```
+git clone https://github.com/ming94539/Meeting-Analysis
+cd Meeting-Analysis
+pip3 install -r requirements.txt
+```
