@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, json
 import subprocess
-#import keras.models
 import sys
 import os
 from datetime import datetime
@@ -10,13 +9,13 @@ from process_transcripts import get_speakers,get_durations,clean_transcript,remo
 app = Flask(__name__)
 import spacy
 from email_inference import email_intent
-#global model, graph
-#model, graph = init()
 
-@app.route('/')#if they are at the main page
+#Landing Page. Don't display any of the charts.
+@app.route('/')
 def index():
     return render_template('index.html',dataPie=0,displayPie=0,lineData=0,barData=0,displayCloud1=0,displayCloud2=1)
-#index_without_bar.html
+
+#Return the formatted data for bar chart - Sentiment Analysis
 def reformat_sentiment(profile):
     data = []
     tempkey = ''
@@ -42,6 +41,7 @@ def reformat_sentiment(profile):
         data.append(tempDict)
     return data
 
+#Return the formatted data for line chart - Sentiment Analysis
 def get_line_sentiment(speaker_timeline_sent):
     lineData = []
     for key in speaker_timeline_sent:
@@ -56,6 +56,7 @@ def get_line_sentiment(speaker_timeline_sent):
     lineData=json.dumps(lineData)
     return lineData
 
+#Return the Pie Chart for Engangement durations for speakers
 def engagement_pie(transcriptInput,speakers):
     dataVal = []
     speakerDurations, total_time = get_durations(transcriptInput,speakers)
@@ -67,7 +68,9 @@ def engagement_pie(transcriptInput,speakers):
     dataVal=json.dumps(dataVal)
     displayPie=1
     return dataVal,displayPie
-    
+
+#Create the word cloud images. NOTE: Currently creating a new image everytime with unique timestamp instead of replacing
+#images since the flask UI have trouble updating the word cloud images if the image names remain the same. Should find a better solution for this. 
 def create_wordCloud(transcriptInput):
     transcriptInput = transcriptInput.splitlines()
     newlines = []
@@ -88,7 +91,7 @@ def create_wordCloud(transcriptInput):
     run_this(millis)
     return name1,name2
     
-
+#The Main function that calls all the other functions. Calls the preprocessing cleaning, word cloud, line chart, bar chart, pie chart, and actionable items w/ Ensemble functions.
 @app.route('/predict',methods=['GET','POST'])
 def predict():
     dataVal = []
@@ -130,6 +133,7 @@ def predict():
     space = spacy.load("en_core_web_sm")
     doc = space(without_speaker)
     ppl_ner = set()
+    #Common stop words that the NER recognizes as a PERSON
     taboo = ["another","Transcript","another Transcript","Ed W","Bulldog","Bill","Item", "Bill Doc", "Ed w.","Bill dog","SAP Bob"]
     for ent in doc.ents:
         if ent.label_ == "PERSON":
@@ -142,12 +146,11 @@ def predict():
         people_ner+=p+", "
     results = inferencing(True,True,"models/cnn",transcriptInput)
     num_of_results = len(results)
-    #ensemble(transcriptInput)
     return render_template("index.html",results=results,num_of_results=num_of_results,dataPie=dataVal,displayPie=displayPie,lineData=lineData,displayCloud1="static/"+displayCloud1,displayCloud2="static/"+displayCloud2,barData=barData,people_ner=people_ner)
 
 
 if __name__ == '__main__':
-    #port = int(os.environ.get('PORT',5000))
+    #run on port 8085
     app.run(port = 8085)
     
 

@@ -1,9 +1,5 @@
 '''
-Written by Austin Walters 
-Last Edit: January 2, 2019
-For use on https://austingwalters.com
-
-Methods to ingest sentence types
+Contains helper functions that's called by flask_model.py
 '''
 
 from __future__ import print_function

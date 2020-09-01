@@ -1,10 +1,12 @@
+#The Back End code for Sentiment Analysis to produce the line and bar chart
+
 import collections
 import sys
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
-#from tqdm import tqdm
-#import BERTSentiment
 SID = SentimentIntensityAnalyzer()
+
+#Helper Function, Get the sentiment for the text
 def get_sentiment(text, type="nltk"):
     sents = tokenize.sent_tokenize(text)
     scores = collections.defaultdict(float)
@@ -16,6 +18,11 @@ def get_sentiment(text, type="nltk"):
         for feel in ['neg', 'neu', 'pos']:
             scores[feel] += model_scores[feel]
     return scores
+
+#Get Individual Speaker Sentiments
+#Input: String: preprocessed text without timestamps and number lines. Just speakers and their utterance block
+#Output - formatted_speaker_sentiment: Dictionary: {Speaker: {percentage-progress: sentiment score,...} ...}
+#Output - formatted_speaker_time_sentiment: Dictionary: {Speaker: {'Positive': score, 'Neutral':score, 'Negative':score} ...}
 def get_speaker_sentiments(text, type="nltk"):
     speaker_sentiments = collections.defaultdict(collections.defaultdict)
     speaker_time_sentiments = collections.defaultdict(collections.defaultdict)
@@ -46,7 +53,7 @@ def get_speaker_sentiments(text, type="nltk"):
         if line == '\n':
             continue
         colon_ind = line.find(":")
-        id_index = line[1:line.find("|")]#Special ID before the speaker tag
+        id_index = line[1:line.find("|")]#Special ID before the speaker tag, for retrieving time stamps
         print('special id:', id_index)
         if colon_ind != -1:
             temp = line.find("|")
@@ -89,4 +96,5 @@ def get_speaker_sentiments(text, type="nltk"):
         for time in times:
              formatted_speaker_time_sentiments[speaker][time] = round(speaker_time_sentiments[speaker][time], 2)
     print('format speaker time sentiments',formatted_speaker_time_sentiments)
+    print('bar chart format: ', formatted_speaker_sentiments)
     return formatted_speaker_sentiments, formatted_speaker_time_sentiments

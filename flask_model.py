@@ -1,3 +1,11 @@
+#Author: Ming Jeng
+#Description:
+#Code for the Actionable Item Extraction task; called by app.py
+#Code uses sentence_classification model as first pass inference then uses email_intent_classification model as a second pass inference
+#To bold any sentences that's highly likely to be actionable item
+#Other Dependencies:
+# models/cnn.h5
+# models/cnn.json
 from __future__ import print_function
 
 import os
@@ -80,7 +88,6 @@ def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
             spec = 0
             if test[i] == 1:
                 label="QUESTION"
-                #print(i,label,test[i],test_comments[i])
             elif test[i] == 2:
                 label="STATEMENT"
             else:
@@ -106,7 +113,7 @@ def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
                         spec = 2
                         break
                 sorted_commands.append([total_action_item,float('%.3f'%(float(predictions[i][3])*100)),spec])
-        
+       #Second Pass Inference: Uses Email Intent Classification model 
         email_predicted = email_intent(email_input)
         print('number of email predictions:', len(email_predicted))
         print('number of sentence classification predictions:',len(sorted_commands))
@@ -116,7 +123,6 @@ def inferencing(get_transcript,load_model_flag,model_name,dialogue_str):
         sorted_commands = sorted(sorted_commands,key=lambda x:(-x[1],x[0]))
         if len(sorted_commands) > 9:
             sorted_commands = sorted_commands[:6]
-        print('sorted_commands :',sorted_commands)
         return [[tup[0],"("+str(tup[1])+'%)',tup[2]] for tup in sorted_commands]
 if __name__ == "__main__":
     
