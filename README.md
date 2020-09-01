@@ -25,6 +25,10 @@ Clone library on github and install requirements.
 ```
 git clone https://github.com/ming94539/Meeting-Analysis
 cd Meeting-Analysis
+```
+Recommend creating a virtual or conda environment to keep your dependencies isolated. 
+```
+conda create --name Meeting_Analysis python=3.7.7
 pip3 install -r requirements.txt
 ```
 ## Running
