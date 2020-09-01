@@ -27,3 +27,15 @@ git clone https://github.com/ming94539/Meeting-Analysis
 cd Meeting-Analysis
 pip3 install -r requirements.txt
 ```
+## Running
+
+Run the demo
+
+```
+python app.py
+```
+to port forward on local machine if running on remote ssh server
+
+```
+ssh -N -f -L localhost:<local port you want to display on>:localhost:<remote port> -i <private key file> exampleUser0@<IP Address>
+```
